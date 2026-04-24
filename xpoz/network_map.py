@@ -17,6 +17,8 @@ DEFAULT_FIELDS = [
     "verified",
 ]
 
+# CORBIN'S API KEY: K3Codyyyg7C8vCpzdYr86P9RWQVa3GaRd83DthXU01XcR2HtDl8hCXpRREKEeyMGT9T5Cw1
+
 # XPOZ_API_KEY=... ./.venv/bin/python network_map.py realDonaldTrump \
 #   --seed-limit 100 --per-account-limit 500 \
 #   --output-dir trump_network_map --timeout 60 --debug
