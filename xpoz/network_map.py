@@ -6,6 +6,8 @@ from pathlib import Path
 
 from xpoz import XpozClient
 
+from xpoz_cache import XpozCache, dicts_to_fake_users
+
 DEFAULT_FIELDS = [
     "id",
     "username",
@@ -15,7 +17,10 @@ DEFAULT_FIELDS = [
     "verified",
 ]
 
-# XPOZ_API_KEY=K3CUs6EupSKdO4a3I07jUVWt0iUzaezb2aKJmZap7RDhtZvC5GJhgcoWSeoxKpqyBJxMgKE ./.venv/bin/python network_map.py realDonaldTrump --seed-limit 100 --per-account-limit 500 --output-dir trump_network_map --timeout 60 --debug                                      
+# XPOZ_API_KEY=... ./.venv/bin/python network_map.py realDonaldTrump \
+#   --seed-limit 100 --per-account-limit 500 \
+#   --output-dir trump_network_map --timeout 60 --debug
+
 
 def debug_log(enabled: bool, message: str) -> None:
     if enabled:
@@ -60,6 +65,30 @@ def parse_args() -> argparse.Namespace:
         help="Maximum seconds to wait for each xpoz operation.",
     )
     parser.add_argument(
+        "--cache-db",
+        default="xpoz_cache.db",
+        help="Path to the SQLite cache database (default: xpoz_cache.db).",
+    )
+    parser.add_argument(
+        "--ttl-users",
+        type=float,
+        default=None,
+        metavar="SECONDS",
+        help="Max age in seconds for cached user profiles. Omit to keep forever.",
+    )
+    parser.add_argument(
+        "--ttl-connections",
+        type=float,
+        default=None,
+        metavar="SECONDS",
+        help="Max age in seconds for cached connection lists. Omit to keep forever.",
+    )
+    parser.add_argument(
+        "--no-cache",
+        action="store_true",
+        help="Disable the cache for this run (always hits the API).",
+    )
+    parser.add_argument(
         "--debug",
         action="store_true",
         help="Print detailed progress logs while building the network.",
@@ -69,19 +98,25 @@ def parse_args() -> argparse.Namespace:
 
 def fetch_connections(
     client: XpozClient,
+    cache: XpozCache | None,
     username: str,
     connection_type: str,
     limit: int,
     debug: bool = False,
 ) -> list:
+    """Fetch paginated connections, consulting the cache first."""
     if limit <= 0:
         debug_log(debug, f"Skipping {connection_type} fetch for @{username}: limit is {limit}.")
         return []
 
-    debug_log(
-        debug,
-        f"Fetching up to {limit} {connection_type} records for @{username}.",
-    )
+    # --- cache read ---
+    if cache is not None:
+        cached = cache.get_connections(username, connection_type, limit)
+        if cached is not None:
+            debug_log(debug, f"Cache hit: {connection_type} for @{username} ({len(cached)} items).")
+            return dicts_to_fake_users(cached)
+
+    debug_log(debug, f"Fetching up to {limit} {connection_type} records for @{username}.")
     page = client.twitter.get_user_connections(
         username,
         connection_type,
@@ -147,10 +182,12 @@ def fetch_connections(
         requested_page += 1
 
     trimmed = items[:limit]
-    debug_log(
-        debug,
-        f"Completed {connection_type} fetch for @{username}: returning {len(trimmed)} records.",
-    )
+
+    # --- cache write ---
+    if cache is not None:
+        cache.set_connections(username, connection_type, limit, trimmed)
+
+    debug_log(debug, f"Completed {connection_type} fetch for @{username}: returning {len(trimmed)} records.")
     return trimmed
 
 
@@ -231,26 +268,49 @@ def main() -> None:
         ),
     )
 
+    cache: XpozCache | None = None
+    if not args.no_cache:
+        cache = XpozCache(
+            args.cache_db,
+            ttl_users=args.ttl_users,
+            ttl_connections=args.ttl_connections,
+            debug=args.debug,
+        )
+        if args.debug:
+            print(f"[cache] opened {args.cache_db!r}  stats={cache.stats()}")
+
     client = XpozClient(args.api_key, timeout=args.timeout, check_update=False)
     try:
         debug_log(args.debug, f"Looking up seed user @{args.username}.")
-        seed_user = client.twitter.get_user(args.username, fields=DEFAULT_FIELDS)
+
+        # --- cached user lookup ---
+        seed_user = None
+        if cache is not None:
+            cached_user = cache.get_user(args.username)
+            if cached_user is not None:
+                from xpoz_cache import _FakeUser
+                seed_user = _FakeUser(cached_user)
+
+        if seed_user is None:
+            seed_user = client.twitter.get_user(args.username, fields=DEFAULT_FIELDS)
+            if cache is not None:
+                cache.set_user(seed_user)
+
         seed_username = seed_user.username or args.username
         debug_log(
             args.debug,
             f"Resolved seed user to @{seed_username} ({seed_user.name or 'no display name'}).",
         )
+
         first_degree = fetch_connections(
             client,
+            cache,
             seed_username,
             "following",
             args.seed_limit,
             debug=args.debug,
         )
-        debug_log(
-            args.debug,
-            f"Seed following sample contains {len(first_degree)} raw records.",
-        )
+        debug_log(args.debug, f"Seed following sample contains {len(first_degree)} raw records.")
 
         nodes_by_username: dict[str, dict] = {
             seed_username: node_payload(seed_user, role="seed"),
@@ -265,10 +325,7 @@ def main() -> None:
             seed_usernames.add(user.username)
             nodes_by_username[user.username] = node_payload(user, role="seed_following")
             edges.append(edge_payload(seed_username, user.username, "seed_follows"))
-            debug_log(
-                args.debug,
-                f"Added seed edge @{seed_username} -> @{user.username}.",
-            )
+            debug_log(args.debug, f"Added seed edge @{seed_username} -> @{user.username}.")
 
         interesting_usernames = set(seed_usernames)
         interesting_usernames.add(seed_username)
@@ -284,6 +341,7 @@ def main() -> None:
             debug_log(args.debug, f"Inspecting second-degree following for @{user.username}.")
             following = fetch_connections(
                 client,
+                cache,
                 user.username,
                 "following",
                 args.per_account_limit,
@@ -296,18 +354,12 @@ def main() -> None:
                 if neighbor.username == user.username:
                     continue
                 if neighbor.username not in nodes_by_username:
-                    nodes_by_username[neighbor.username] = node_payload(
-                        neighbor,
-                        role="seed",
-                    )
+                    nodes_by_username[neighbor.username] = node_payload(neighbor, role="seed")
                 edges.append(
                     edge_payload(user.username, neighbor.username, "follow_back_within_seed")
                 )
                 matched_edges += 1
-                debug_log(
-                    args.debug,
-                    f"Added internal edge @{user.username} -> @{neighbor.username}.",
-                )
+                debug_log(args.debug, f"Added internal edge @{user.username} -> @{neighbor.username}.")
             debug_log(
                 args.debug,
                 f"Finished @{user.username}: found {matched_edges} edges back into the sampled network.",
@@ -350,16 +402,12 @@ def main() -> None:
             nodes,
             ["id", "username", "label", "followers_count", "following_count", "verified", "role"],
         )
-        write_csv(
-            edges_csv_path,
-            deduped_edges,
-            ["source", "target", "type"],
-        )
+        write_csv(edges_csv_path, deduped_edges, ["source", "target", "type"])
         write_dot(dot_path, nodes, deduped_edges, seed_username)
-        debug_log(
-            args.debug,
-            "Finished writing JSON, CSV, and DOT outputs.",
-        )
+        debug_log(args.debug, "Finished writing JSON, CSV, and DOT outputs.")
+
+        if cache is not None and args.debug:
+            print(f"[cache] final stats={cache.stats()}")
 
         mutual_with_seed = sorted(
             edge["source"]
@@ -382,6 +430,8 @@ def main() -> None:
         print(f"Graphviz DOT: {dot_path}")
     finally:
         client.close()
+        if cache is not None:
+            cache.close()
 
 
 if __name__ == "__main__":

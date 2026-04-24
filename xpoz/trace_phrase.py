@@ -10,7 +10,11 @@ from pydantic import BaseModel
 from xpoz import XpozClient
 from xpoz._config import _tools
 
-# XPOZ_API_KEY=K3CUs6EupSKdO4a3I07jUVWt0iUzaezb2aKJmZap7RDhtZvC5GJhgcoWSeoxKpqyBJxMgKE ./.venv/bin/python trace_phrase.py realDonaldTrump "tylenol" --network-json network_map_output2/realDonaldTrump_follow_network.json --output-dir trump_phrase_trace_test2 --debug
+from xpoz_cache import XpozCache, dicts_to_fake_users
+
+# XPOZ_API_KEY=... ./.venv/bin/python trace_phrase.py realDonaldTrump "tylenol" \
+#   --network-json network_map_output2/realDonaldTrump_follow_network.json \
+#   --output-dir trump_phrase_trace_test2 --debug
 
 USER_FIELDS = [
     "id",
@@ -130,6 +134,37 @@ def parse_args() -> argparse.Namespace:
         help="Include retweets in search results. By default retweets are filtered out.",
     )
     parser.add_argument(
+        "--cache-db",
+        default="xpoz_cache.db",
+        help="Path to the SQLite cache database (default: xpoz_cache.db).",
+    )
+    parser.add_argument(
+        "--ttl-users",
+        type=float,
+        default=None,
+        metavar="SECONDS",
+        help="Max age in seconds for cached user profiles. Omit to keep forever.",
+    )
+    parser.add_argument(
+        "--ttl-connections",
+        type=float,
+        default=None,
+        metavar="SECONDS",
+        help="Max age in seconds for cached connection lists. Omit to keep forever.",
+    )
+    parser.add_argument(
+        "--ttl-posts",
+        type=float,
+        default=None,
+        metavar="SECONDS",
+        help="Max age in seconds for cached post search results. Omit to keep forever.",
+    )
+    parser.add_argument(
+        "--no-cache",
+        action="store_true",
+        help="Disable the cache for this run (always hits the API).",
+    )
+    parser.add_argument(
         "--debug",
         action="store_true",
         help="Print detailed progress logs while building the trace.",
@@ -149,13 +184,22 @@ def safe_slug(value: str) -> str:
 
 def fetch_connections(
     client: XpozClient,
+    cache: XpozCache | None,
     username: str,
     connection_type: str,
     limit: int,
     debug: bool,
 ) -> list:
+    """Fetch paginated connections, consulting the cache first."""
     if limit <= 0:
         return []
+
+    # --- cache read ---
+    if cache is not None:
+        cached = cache.get_connections(username, connection_type, limit)
+        if cached is not None:
+            debug_log(debug, f"Cache hit: {connection_type} for @{username} ({len(cached)} items).")
+            return dicts_to_fake_users(cached)
 
     debug_log(debug, f"Fetching up to {limit} {connection_type} for @{username}.")
     page = client.twitter.get_user_connections(
@@ -183,7 +227,13 @@ def fetch_connections(
             ),
         )
 
-    return items[:limit]
+    trimmed = items[:limit]
+
+    # --- cache write ---
+    if cache is not None:
+        cache.set_connections(username, connection_type, limit, trimmed)
+
+    return trimmed
 
 
 def user_row(user, role: str, discovered_from: str | None) -> dict:
@@ -202,13 +252,26 @@ def user_row(user, role: str, discovered_from: str | None) -> dict:
 
 def build_author_sample(
     client: XpozClient,
+    cache: XpozCache | None,
     seed_username: str,
     seed_limit: int,
     per_account_limit: int,
     max_authors: int,
     debug: bool,
 ) -> tuple[dict[str, dict], list[dict]]:
-    seed_user = client.twitter.get_user(seed_username, fields=USER_FIELDS)
+    # --- cached seed user lookup ---
+    seed_user = None
+    if cache is not None:
+        cached_user = cache.get_user(seed_username)
+        if cached_user is not None:
+            from xpoz_cache import _FakeUser
+            seed_user = _FakeUser(cached_user)
+
+    if seed_user is None:
+        seed_user = client.twitter.get_user(seed_username, fields=USER_FIELDS)
+        if cache is not None:
+            cache.set_user(seed_user)
+
     resolved_seed = seed_user.username or seed_username
     authors: dict[str, dict] = {
         resolved_seed: user_row(seed_user, "seed", None),
@@ -217,6 +280,7 @@ def build_author_sample(
 
     first_degree = fetch_connections(
         client,
+        cache,
         resolved_seed,
         "following",
         seed_limit,
@@ -249,6 +313,7 @@ def build_author_sample(
         )
         second_degree = fetch_connections(
             client,
+            cache,
             user.username,
             "following",
             per_account_limit,
@@ -387,6 +452,7 @@ def post_row(post, searched_author: str, phrase: str) -> dict:
 
 def search_author_posts(
     client: XpozClient,
+    cache: XpozCache | None,
     author_username: str,
     phrase: str,
     posts_per_author: int,
@@ -397,6 +463,15 @@ def search_author_posts(
 ) -> list[dict]:
     if posts_per_author <= 0:
         return []
+
+    # --- cache read ---
+    if cache is not None:
+        cached = cache.get_posts(
+            author_username, phrase, start_date, end_date, include_retweets, posts_per_author
+        )
+        if cached is not None:
+            debug_log(debug, f"Cache hit: posts for @{author_username} phrase={phrase!r} ({len(cached)} rows).")
+            return cached
 
     query = exact_query(phrase)
     debug_log(debug, f"Searching @{author_username} for {query}.")
@@ -427,6 +502,13 @@ def search_author_posts(
         for post in posts[:posts_per_author]
     ]
     debug_log(debug, f"Found {len(rows)} matching posts for @{author_username}.")
+
+    # --- cache write ---
+    if cache is not None:
+        cache.set_posts(
+            author_username, phrase, start_date, end_date, include_retweets, posts_per_author, rows
+        )
+
     return rows
 
 
@@ -449,6 +531,18 @@ def main() -> None:
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    cache: XpozCache | None = None
+    if not args.no_cache:
+        cache = XpozCache(
+            args.cache_db,
+            ttl_users=args.ttl_users,
+            ttl_connections=args.ttl_connections,
+            ttl_posts=args.ttl_posts,
+            debug=args.debug,
+        )
+        if args.debug:
+            print(f"[cache] opened {args.cache_db!r}  stats={cache.stats()}")
+
     client = XpozClient(args.api_key)
     try:
         if args.network_json:
@@ -462,6 +556,7 @@ def main() -> None:
             debug_log(args.debug, f"Building author sample from @{args.username}.")
             authors, network_edges = build_author_sample(
                 client,
+                cache,
                 args.username,
                 args.seed_limit,
                 args.per_account_limit,
@@ -481,6 +576,7 @@ def main() -> None:
                 all_posts.extend(
                     search_author_posts(
                         client,
+                        cache,
                         username,
                         args.phrase,
                         args.posts_per_author,
@@ -562,6 +658,9 @@ def main() -> None:
             },
         )
 
+        if cache is not None and args.debug:
+            print(f"[cache] final stats={cache.stats()}")
+
         print(f"Searched {len(authors)} authors for: {exact_query(args.phrase)}")
         print(f"Found {len(all_posts)} matching posts from {len(earliest_posts)} authors.")
         if all_posts:
@@ -578,6 +677,8 @@ def main() -> None:
         print(f"JSON: {json_path}")
     finally:
         client.close()
+        if cache is not None:
+            cache.close()
 
 
 if __name__ == "__main__":
