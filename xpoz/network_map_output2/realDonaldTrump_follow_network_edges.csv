@@ -1,0 +1,5 @@
+source,target,type
+realDonaldTrump,DonaldJTrumpJr,seed_follows
+realDonaldTrump,Jim_Jordan,seed_follows
+DonaldJTrumpJr,Jim_Jordan,follow_back_within_seed
+Jim_Jordan,DonaldJTrumpJr,follow_back_within_seed

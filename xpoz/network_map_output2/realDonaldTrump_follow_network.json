@@ -1,0 +1,58 @@
+{
+  "seed_username": "realDonaldTrump",
+  "seed_limit": 2,
+  "per_account_limit": 500,
+  "node_count": 3,
+  "edge_count": 4,
+  "nodes": [
+    {
+      "id": "39344374",
+      "username": "DonaldJTrumpJr",
+      "label": "Donald Trump Jr.",
+      "followers_count": 16247805,
+      "following_count": 2323,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "18166778",
+      "username": "Jim_Jordan",
+      "label": "Rep. Jim Jordan",
+      "followers_count": 6820791,
+      "following_count": 3635,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "25073877",
+      "username": "realDonaldTrump",
+      "label": "Donald J. Trump",
+      "followers_count": 111403932,
+      "following_count": 53,
+      "verified": true,
+      "role": "seed"
+    }
+  ],
+  "edges": [
+    {
+      "source": "realDonaldTrump",
+      "target": "DonaldJTrumpJr",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "Jim_Jordan",
+      "type": "seed_follows"
+    },
+    {
+      "source": "DonaldJTrumpJr",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Jim_Jordan",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    }
+  ]
+}
