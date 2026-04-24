@@ -1,16 +1,43 @@
 {
   "seed_username": "realDonaldTrump",
-  "seed_limit": 10,
+  "seed_limit": 200,
   "per_account_limit": 500,
   "expand_top_n": null,
-  "node_count": 11,
-  "edge_count": 35,
+  "node_count": 54,
+  "edge_count": 571,
   "nodes": [
+    {
+      "id": "23970102",
+      "username": "BillOReilly",
+      "label": "Bill O'Reilly",
+      "followers_count": 3326114,
+      "following_count": 132,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "4121225056",
+      "username": "CLewandowski_",
+      "label": "Corey R. Lewandowski",
+      "followers_count": 579891,
+      "following_count": 56,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "620571475",
+      "username": "DanScavino",
+      "label": "Dan Scavino Jr.\ud83c\uddfa\ud83c\uddf8\ud83e\udd85",
+      "followers_count": 2236208,
+      "following_count": 1015,
+      "verified": true,
+      "role": "seed_following"
+    },
     {
       "id": "2908170952",
       "username": "DiamondandSilk",
       "label": "Diamond and Silk\u00ae",
-      "followers_count": 2427544,
+      "followers_count": 2427549,
       "following_count": 116,
       "verified": true,
       "role": "seed_following"
@@ -19,7 +46,7 @@
       "id": "39344374",
       "username": "DonaldJTrumpJr",
       "label": "Donald Trump Jr.",
-      "followers_count": 16247791,
+      "followers_count": 16247849,
       "following_count": 2323,
       "verified": true,
       "role": "seed_following"
@@ -28,8 +55,17 @@
       "id": "39349894",
       "username": "EricTrump",
       "label": "Eric Trump",
-      "followers_count": 6027104,
+      "followers_count": 6027125,
       "following_count": 1295,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "246500501",
+      "username": "GeraldoRivera",
+      "label": "Geraldo Rivera",
+      "followers_count": 394117,
+      "following_count": 2021,
       "verified": true,
       "role": "seed_following"
     },
@@ -37,7 +73,7 @@
       "id": "50769180",
       "username": "IngrahamAngle",
       "label": "Laura Ingraham",
-      "followers_count": 5304985,
+      "followers_count": 5304990,
       "following_count": 767,
       "verified": true,
       "role": "seed_following"
@@ -46,8 +82,17 @@
       "id": "52544275",
       "username": "IvankaTrump",
       "label": "Ivanka Trump",
-      "followers_count": 11190293,
+      "followers_count": 11190292,
       "following_count": 1749,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "56561449",
+      "username": "JesseBWatters",
+      "label": "Jesse Watters",
+      "followers_count": 3627802,
+      "following_count": 1873,
       "verified": true,
       "role": "seed_following"
     },
@@ -55,7 +100,7 @@
       "id": "18166778",
       "username": "Jim_Jordan",
       "label": "Rep. Jim Jordan",
-      "followers_count": 6820816,
+      "followers_count": 6820811,
       "following_count": 3635,
       "verified": true,
       "role": "seed_following"
@@ -64,8 +109,251 @@
       "id": "29458079",
       "username": "JudgeJeanine",
       "label": "Jeanine Pirro",
-      "followers_count": 4162461,
+      "followers_count": 4162467,
       "following_count": 570,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "34852681",
+      "username": "KatrinaCampins",
+      "label": "Katrina Campins",
+      "followers_count": 225828,
+      "following_count": 2186,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "471672239",
+      "username": "KellyannePolls",
+      "label": "Kellyanne Conway",
+      "followers_count": 3564240,
+      "following_count": 1200,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "75541946",
+      "username": "LaraLeaTrump",
+      "label": "Lara Trump",
+      "followers_count": 2203266,
+      "following_count": 823,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "26487169",
+      "username": "LouDobbs",
+      "label": "Lou Dobbs",
+      "followers_count": 2372100,
+      "following_count": 2929,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "108471631",
+      "username": "MELANIATRUMP",
+      "label": "MELANIA TRUMP",
+      "followers_count": 3976075,
+      "following_count": 68,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "208155240",
+      "username": "MariaBartiromo",
+      "label": "Maria Bartiromo",
+      "followers_count": 1597096,
+      "following_count": 2154,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "316865635",
+      "username": "MarkBurnettTV",
+      "label": "Mark Burnett",
+      "followers_count": 210011,
+      "following_count": 437,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "963480595",
+      "username": "MarkMeadows",
+      "label": "Mark Meadows",
+      "followers_count": 1080698,
+      "following_count": 1079,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "22203756",
+      "username": "Mike_Pence",
+      "label": "Mike Pence",
+      "followers_count": 5667593,
+      "following_count": 66,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "475802156",
+      "username": "MrsVanessaTrump",
+      "label": "Ms Vanessa Trump",
+      "followers_count": 421865,
+      "following_count": 268,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "818927131883356161",
+      "username": "PressSec45",
+      "label": "Kayleigh McEnany 45 Archived",
+      "followers_count": 5339139,
+      "following_count": 329,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "322293052",
+      "username": "RealRomaDowney",
+      "label": "Roma Downey",
+      "followers_count": 261024,
+      "following_count": 2994,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "20733972",
+      "username": "Reince",
+      "label": "Reince Priebus",
+      "followers_count": 788619,
+      "following_count": 323,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "2353605901",
+      "username": "RonnaMcDaniel",
+      "label": "Ronna McDaniel",
+      "followers_count": 1258185,
+      "following_count": 2727,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "823367015830323201",
+      "username": "Scavino45",
+      "label": "Dan Scavino Jr. Archived",
+      "followers_count": 762456,
+      "following_count": 878,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "1249982359",
+      "username": "SenMcConnell",
+      "label": "U.S. Senator Mitch McConnell",
+      "followers_count": 2100792,
+      "following_count": 112,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "19739126",
+      "username": "SpeakerMcCarthy",
+      "label": "Kevin McCarthy",
+      "followers_count": 3125935,
+      "following_count": 1479,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "729676086632656900",
+      "username": "TeamTrump",
+      "label": "Team Trump (Text TRUMP to 88022)",
+      "followers_count": 2619663,
+      "following_count": 185,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "245963716",
+      "username": "TiffanyATrump",
+      "label": "Tiffany Ariana Trump",
+      "followers_count": 1022924,
+      "following_count": 205,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "720293443260456960",
+      "username": "Trump",
+      "label": "The Trump Organization",
+      "followers_count": 758873,
+      "following_count": 58,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "726414091",
+      "username": "TrumpCharlotte",
+      "label": "Trump Charlotte",
+      "followers_count": 113737,
+      "following_count": 120,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "48223726",
+      "username": "TrumpChicago",
+      "label": "Trump Chicago",
+      "followers_count": 131425,
+      "following_count": 3144,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "633797941",
+      "username": "TrumpDoral",
+      "label": "Trump National Doral Miami",
+      "followers_count": 138119,
+      "following_count": 1546,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "2325495378",
+      "username": "TrumpGolf",
+      "label": "Trump Golf",
+      "followers_count": 195623,
+      "following_count": 112,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "1013672084",
+      "username": "TrumpGolfDC",
+      "label": "Trump Washington DC",
+      "followers_count": 158075,
+      "following_count": 54,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "29562422",
+      "username": "TrumpGolfLA",
+      "label": "Trump Los Angeles",
+      "followers_count": 134718,
+      "following_count": 96,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "82504071",
+      "username": "TrumpLasVegas",
+      "label": "Trump Las Vegas",
+      "followers_count": 162376,
+      "following_count": 1130,
       "verified": true,
       "role": "seed_following"
     },
@@ -79,11 +367,92 @@
       "role": "seed_following"
     },
     {
+      "id": "1222639789",
+      "username": "VinceMcMahon",
+      "label": "Vince McMahon",
+      "followers_count": 2238347,
+      "following_count": 49,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "822215673812119553",
+      "username": "WhiteHouse45",
+      "label": "The White House 45 Archived",
+      "followers_count": 22790955,
+      "following_count": 12,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "44196397",
+      "username": "elonmusk",
+      "label": "Elon Musk",
+      "followers_count": 238951118,
+      "following_count": 1316,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "14839147",
+      "username": "ericbolling",
+      "label": "\ud83c\uddfa\ud83c\uddf8 ERIC BOLLING \ud83c\uddfa\ud83c\uddf8",
+      "followers_count": 1175124,
+      "following_count": 1311,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "15513604",
+      "username": "foxandfriends",
+      "label": "FOX & Friends",
+      "followers_count": 1189308,
+      "following_count": 217,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "26829777",
+      "username": "garyplayer",
+      "label": "GARY PLAYER",
+      "followers_count": 831882,
+      "following_count": 1650,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "16031927",
+      "username": "greta",
+      "label": "Greta Van Susteren",
+      "followers_count": 1219472,
+      "following_count": 3449,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
       "id": "25101996",
       "username": "kimguilfoyle",
       "label": "Kimberly Guilfoyle",
       "followers_count": 2290992,
       "following_count": 3877,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "770458758",
+      "username": "meremere28",
+      "label": "Meredith ORourke",
+      "followers_count": 19220,
+      "following_count": 1852,
+      "verified": false,
+      "role": "seed_following"
+    },
+    {
+      "id": "17685258",
+      "username": "parscale",
+      "label": "Brad Parscale",
+      "followers_count": 720999,
+      "following_count": 664,
       "verified": true,
       "role": "seed_following"
     },
@@ -97,11 +466,29 @@
       "role": "seed"
     },
     {
+      "id": "1807844428322856963",
+      "username": "realtrumpcoins1",
+      "label": "realtrumpcoins",
+      "followers_count": 37576,
+      "following_count": 2,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
       "id": "41634520",
       "username": "seanhannity",
       "label": "Sean Hannity \ud83c\uddfa\ud83c\uddf8",
-      "followers_count": 7749763,
+      "followers_count": 7749791,
       "following_count": 14,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "1816138985342705664",
+      "username": "worldlibertyfi",
+      "label": "WLFI",
+      "followers_count": 773085,
+      "following_count": 20,
       "verified": true,
       "role": "seed_following"
     }
@@ -158,6 +545,261 @@
       "type": "seed_follows"
     },
     {
+      "source": "realDonaldTrump",
+      "target": "MELANIATRUMP",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "DanScavino",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "LouDobbs",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "Mike_Pence",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "BillOReilly",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TiffanyATrump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "KellyannePolls",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "meremere28",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "realtrumpcoins1",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "worldlibertyfi",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "elonmusk",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "SpeakerMcCarthy",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "SenMcConnell",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "MarkMeadows",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "MariaBartiromo",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "RonnaMcDaniel",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "parscale",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "PressSec45",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "JesseBWatters",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "WhiteHouse45",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "Scavino45",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "Reince",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "RealRomaDowney",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "Trump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpGolf",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TeamTrump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "MrsVanessaTrump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "LaraLeaTrump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "CLewandowski_",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "KatrinaCampins",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "foxandfriends",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "GeraldoRivera",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "ericbolling",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "MarkBurnettTV",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "garyplayer",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "VinceMcMahon",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpDoral",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpCharlotte",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpLasVegas",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpChicago",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpGolfDC",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TrumpGolfLA",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "greta",
+      "type": "seed_follows"
+    },
+    {
+      "source": "elonmusk",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "elonmusk",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "elonmusk",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "WhiteHouse45",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "WhiteHouse45",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "WhiteHouse45",
+      "target": "Scavino45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "WhiteHouse45",
+      "target": "PressSec45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "WhiteHouse45",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
       "source": "DonaldJTrumpJr",
       "target": "Jim_Jordan",
       "type": "follow_back_within_seed"
@@ -165,6 +807,11 @@
     {
       "source": "DonaldJTrumpJr",
       "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "MELANIATRUMP",
       "type": "follow_back_within_seed"
     },
     {
@@ -180,6 +827,11 @@
     {
       "source": "IvankaTrump",
       "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "SpeakerMcCarthy",
       "type": "follow_back_within_seed"
     },
     {
@@ -189,7 +841,22 @@
     },
     {
       "source": "seanhannity",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "seanhannity",
       "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Jim_Jordan",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Jim_Jordan",
+      "target": "JesseBWatters",
       "type": "follow_back_within_seed"
     },
     {
@@ -203,6 +870,81 @@
       "type": "follow_back_within_seed"
     },
     {
+      "source": "Jim_Jordan",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "SenMcConnell",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "KatrinaCampins",
+      "type": "follow_back_within_seed"
+    },
+    {
       "source": "EricTrump",
       "target": "DiamondandSilk",
       "type": "follow_back_within_seed"
@@ -213,6 +955,111 @@
       "type": "follow_back_within_seed"
     },
     {
+      "source": "EricTrump",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Mike_Pence",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Mike_Pence",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Mike_Pence",
+      "target": "WhiteHouse45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Mike_Pence",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "MarkMeadows",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "PressSec45",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
       "source": "IngrahamAngle",
       "target": "Jim_Jordan",
       "type": "follow_back_within_seed"
@@ -224,7 +1071,27 @@
     },
     {
       "source": "IngrahamAngle",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IngrahamAngle",
       "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IngrahamAngle",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "GeraldoRivera",
       "type": "follow_back_within_seed"
     },
     {
@@ -239,12 +1106,302 @@
     },
     {
       "source": "JudgeJeanine",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
       "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MELANIATRUMP",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JesseBWatters",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KellyannePolls",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "BillOReilly",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SpeakerMcCarthy",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TeamTrump",
+      "target": "TuckerCarlson",
       "type": "follow_back_within_seed"
     },
     {
       "source": "DiamondandSilk",
       "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "WhiteHouse45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "elonmusk",
       "type": "follow_back_within_seed"
     },
     {
@@ -259,7 +1416,22 @@
     },
     {
       "source": "DiamondandSilk",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
       "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "TeamTrump",
       "type": "follow_back_within_seed"
     },
     {
@@ -269,7 +1441,22 @@
     },
     {
       "source": "DiamondandSilk",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
       "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "LouDobbs",
       "type": "follow_back_within_seed"
     },
     {
@@ -278,8 +1465,1888 @@
       "type": "follow_back_within_seed"
     },
     {
+      "source": "DiamondandSilk",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "Scavino45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LouDobbs",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
       "source": "kimguilfoyle",
       "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "kimguilfoyle",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "kimguilfoyle",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "kimguilfoyle",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "VinceMcMahon",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DanScavino",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "KatrinaCampins",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "LaraLeaTrump",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SenMcConnell",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SenMcConnell",
+      "target": "PressSec45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SenMcConnell",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "SenMcConnell",
+      "target": "WhiteHouse45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MariaBartiromo",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MariaBartiromo",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MariaBartiromo",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MariaBartiromo",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "KatrinaCampins",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "SenMcConnell",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "MarkBurnettTV",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RonnaMcDaniel",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "MarkBurnettTV",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "greta",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "foxandfriends",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "foxandfriends",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "ericbolling",
+      "target": "MarkBurnettTV",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "ericbolling",
+      "target": "KatrinaCampins",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "ericbolling",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "ericbolling",
+      "target": "worldlibertyfi",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MarkMeadows",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MarkMeadows",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "Scavino45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "TeamTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TiffanyATrump",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "garyplayer",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "garyplayer",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "garyplayer",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "SenMcConnell",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "MarkMeadows",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Reince",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "worldlibertyfi",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "worldlibertyfi",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "worldlibertyfi",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "worldlibertyfi",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Scavino45",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "realtrumpcoins1",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "worldlibertyfi",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Trump",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "KatrinaCampins",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "MariaBartiromo",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "MarkMeadows",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "parscale",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "Scavino45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "CLewandowski_",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "KellyannePolls",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MrsVanessaTrump",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "GeraldoRivera",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RealRomaDowney",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RealRomaDowney",
+      "target": "foxandfriends",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "RealRomaDowney",
+      "target": "greta",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "RonnaMcDaniel",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "GeraldoRivera",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "CLewandowski_",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "SpeakerMcCarthy",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "LouDobbs",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "BillOReilly",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "Reince",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "IngrahamAngle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "KatrinaCampins",
+      "target": "JesseBWatters",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MarkBurnettTV",
+      "target": "RealRomaDowney",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MarkBurnettTV",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "MarkBurnettTV",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "garyplayer",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolf",
+      "target": "realtrumpcoins1",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "PressSec45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpLasVegas",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfDC",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpDoral",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpCharlotte",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpGolfLA",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "MELANIATRUMP",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpChicago",
+      "target": "WhiteHouse45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpDoral",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpChicago",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpGolfDC",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "Mike_Pence",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "MrsVanessaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TiffanyATrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpGolfLA",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpLasVegas",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "DanScavino",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "TrumpGolf",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "TrumpCharlotte",
+      "target": "Scavino45",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "realtrumpcoins1",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "realtrumpcoins1",
+      "target": "Trump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "ericbolling",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "worldlibertyfi",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "LaraLeaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "TeamTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "elonmusk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "parscale",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "JudgeJeanine",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "meremere28",
+      "target": "IvankaTrump",
       "type": "follow_back_within_seed"
     }
   ]
