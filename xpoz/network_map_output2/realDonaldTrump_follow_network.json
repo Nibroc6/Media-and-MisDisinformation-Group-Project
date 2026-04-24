@@ -1,16 +1,53 @@
 {
   "seed_username": "realDonaldTrump",
-  "seed_limit": 2,
+  "seed_limit": 10,
   "per_account_limit": 500,
-  "node_count": 3,
-  "edge_count": 4,
+  "expand_top_n": null,
+  "node_count": 11,
+  "edge_count": 35,
   "nodes": [
+    {
+      "id": "2908170952",
+      "username": "DiamondandSilk",
+      "label": "Diamond and Silk\u00ae",
+      "followers_count": 2427544,
+      "following_count": 116,
+      "verified": true,
+      "role": "seed_following"
+    },
     {
       "id": "39344374",
       "username": "DonaldJTrumpJr",
       "label": "Donald Trump Jr.",
-      "followers_count": 16247805,
+      "followers_count": 16247791,
       "following_count": 2323,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "39349894",
+      "username": "EricTrump",
+      "label": "Eric Trump",
+      "followers_count": 6027104,
+      "following_count": 1295,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "50769180",
+      "username": "IngrahamAngle",
+      "label": "Laura Ingraham",
+      "followers_count": 5304985,
+      "following_count": 767,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "52544275",
+      "username": "IvankaTrump",
+      "label": "Ivanka Trump",
+      "followers_count": 11190293,
+      "following_count": 1749,
       "verified": true,
       "role": "seed_following"
     },
@@ -18,8 +55,35 @@
       "id": "18166778",
       "username": "Jim_Jordan",
       "label": "Rep. Jim Jordan",
-      "followers_count": 6820791,
+      "followers_count": 6820816,
       "following_count": 3635,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "29458079",
+      "username": "JudgeJeanine",
+      "label": "Jeanine Pirro",
+      "followers_count": 4162461,
+      "following_count": 570,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "22703645",
+      "username": "TuckerCarlson",
+      "label": "Tucker Carlson",
+      "followers_count": 17591471,
+      "following_count": 3,
+      "verified": true,
+      "role": "seed_following"
+    },
+    {
+      "id": "25101996",
+      "username": "kimguilfoyle",
+      "label": "Kimberly Guilfoyle",
+      "followers_count": 2290992,
+      "following_count": 3877,
       "verified": true,
       "role": "seed_following"
     },
@@ -31,6 +95,15 @@
       "following_count": 53,
       "verified": true,
       "role": "seed"
+    },
+    {
+      "id": "41634520",
+      "username": "seanhannity",
+      "label": "Sean Hannity \ud83c\uddfa\ud83c\uddf8",
+      "followers_count": 7749763,
+      "following_count": 14,
+      "verified": true,
+      "role": "seed_following"
     }
   ],
   "edges": [
@@ -45,13 +118,168 @@
       "type": "seed_follows"
     },
     {
+      "source": "realDonaldTrump",
+      "target": "DiamondandSilk",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "seanhannity",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "IvankaTrump",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "TuckerCarlson",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "IngrahamAngle",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "JudgeJeanine",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "kimguilfoyle",
+      "type": "seed_follows"
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "EricTrump",
+      "type": "seed_follows"
+    },
+    {
       "source": "DonaldJTrumpJr",
       "target": "Jim_Jordan",
       "type": "follow_back_within_seed"
     },
     {
+      "source": "DonaldJTrumpJr",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IvankaTrump",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "seanhannity",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
       "source": "Jim_Jordan",
       "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "Jim_Jordan",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "EricTrump",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IngrahamAngle",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IngrahamAngle",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "IngrahamAngle",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "Jim_Jordan",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "DiamondandSilk",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "JudgeJeanine",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "kimguilfoyle",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "seanhannity",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "TuckerCarlson",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "IvankaTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "EricTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "realDonaldTrump",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "DiamondandSilk",
+      "target": "DonaldJTrumpJr",
+      "type": "follow_back_within_seed"
+    },
+    {
+      "source": "kimguilfoyle",
+      "target": "DiamondandSilk",
       "type": "follow_back_within_seed"
     }
   ]
