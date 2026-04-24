@@ -1,0 +1,13 @@
+[workspace]
+channels = ["conda-forge"]
+name = "Media-and-MisDisinformation-Group-Project"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = ">=3.14.4,<3.15"
+
+[pypi-dependencies]
+twscrape = ">=0.17.0, <0.18"
