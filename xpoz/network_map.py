@@ -1,5 +1,3 @@
-#network_map.py
-
 import argparse
 import csv
 import json
@@ -18,8 +16,6 @@ DEFAULT_FIELDS = [
     "following_count",
     "verified",
 ]
-
-# CORBIN'S API KEY: K3Codyyyg7C8vCpzdYr86P9RWQVa3GaRd83DthXU01XcR2HtDl8hCXpRREKEeyMGT9T5Cw1
 
 # XPOZ_API_KEY=... ./.venv/bin/python network_map.py realDonaldTrump \
 #   --seed-limit 100 --per-account-limit 500 \
@@ -56,6 +52,16 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=200,
         help="Maximum following records to inspect for each account in the seed set.",
+    )
+    parser.add_argument(
+        "--expand-top-n",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Only expand the top N first-degree accounts by follower count. "
+            "Omit to expand all accounts (default behaviour)."
+        ),
     )
     parser.add_argument(
         "--output-dir",
@@ -338,11 +344,38 @@ def main() -> None:
             f"Tracking {len(interesting_usernames)} usernames in the seed neighborhood.",
         )
 
-        for user in first_degree:
-            if not user.username:
-                continue
+        # Sort first-degree accounts by follower count descending so that the
+        # most influential nodes are expanded first. This means if you hit API
+        # limits or use --expand-top-n, you've prioritised high-reach accounts.
+        first_degree_sorted = sorted(
+            [u for u in first_degree if u.username],
+            key=lambda u: (u.followers_count or 0),
+            reverse=True,
+        )
+        debug_log(
+            args.debug,
+            (
+                "Sorted first-degree accounts by followers_count descending. "
+                f"Top 5: {[(u.username, u.followers_count) for u in first_degree_sorted[:5]]}"
+            ),
+        )
 
-            debug_log(args.debug, f"Inspecting second-degree following for @{user.username}.")
+        # Optionally cap how many accounts get expanded
+        expand_list = first_degree_sorted
+        if args.expand_top_n is not None:
+            expand_list = first_degree_sorted[: args.expand_top_n]
+            debug_log(
+                args.debug,
+                f"--expand-top-n={args.expand_top_n}: expanding {len(expand_list)} of "
+                f"{len(first_degree_sorted)} first-degree accounts.",
+            )
+
+        for user in expand_list:
+            debug_log(
+                args.debug,
+                f"Inspecting second-degree following for @{user.username} "
+                f"(followers={user.followers_count or 0:,}).",
+            )
             following = fetch_connections(
                 client,
                 cache,
@@ -388,6 +421,7 @@ def main() -> None:
             "seed_username": seed_username,
             "seed_limit": args.seed_limit,
             "per_account_limit": args.per_account_limit,
+            "expand_top_n": args.expand_top_n,
             "node_count": len(nodes),
             "edge_count": len(deduped_edges),
             "nodes": nodes,
@@ -421,6 +455,7 @@ def main() -> None:
 
         print(f"Seed user: @{seed_username}")
         print(f"Pulled {len(seed_usernames)} followed accounts from the seed user.")
+        print(f"Expanded {len(expand_list)} accounts (sorted by follower count).")
         print(f"Mapped {len(deduped_edges)} directed edges across {len(nodes)} nodes.")
         if mutual_with_seed:
             print("Accounts that follow the seed user back:")
