@@ -15,6 +15,7 @@ DEFAULT_FIELDS = [
     "verified",
 ]
 
+# XPOZ_API_KEY=K3CUs6EupSKdO4a3I07jUVWt0iUzaezb2aKJmZap7RDhtZvC5GJhgcoWSeoxKpqyBJxMgKE ./.venv/bin/python network_map.py realDonaldTrump --seed-limit 100 --per-account-limit 500 --output-dir trump_network_map --timeout 60 --debug                                      
 
 def debug_log(enabled: bool, message: str) -> None:
     if enabled:
