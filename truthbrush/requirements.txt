@@ -1,0 +1,3 @@
+truthbrush
+python-dotenv
+tenacity
