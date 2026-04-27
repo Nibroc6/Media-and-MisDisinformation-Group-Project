@@ -5,7 +5,7 @@ library(jsonlite)
 # Nodes
 Players <- data.frame(
   name = c(
-    "Donald Trump Jr.", 
+    "Donald Trump", 
     "Robert F. Kennedy Jr.",
     "Laura Loomer",
     "Matt Gaetz",
