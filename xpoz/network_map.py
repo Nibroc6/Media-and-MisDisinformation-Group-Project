@@ -18,7 +18,7 @@ DEFAULT_FIELDS = [
 ]
 
 # XPOZ_API_KEY=... ./.venv/bin/python network_map.py realDonaldTrump \
-#   --seed-limit 100 --per-account-limit 500 \
+#   --seed-limit 100 --per-account-limit 500 --per-account-top-n 100 \
 #   --output-dir trump_network_map --timeout 60 --debug
 
 
@@ -51,7 +51,22 @@ def parse_args() -> argparse.Namespace:
         "--per-account-limit",
         type=int,
         default=200,
-        help="Maximum following records to inspect for each account in the seed set.",
+        help=(
+            "Maximum following records to fetch for each first-degree account. "
+            "Acts as the API fetch ceiling. Use --per-account-top-n to then "
+            "filter that fetched set down to the highest-follower accounts."
+        ),
+    )
+    parser.add_argument(
+        "--per-account-top-n",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "After fetching up to --per-account-limit records for each first-degree "
+            "account, sort them by follower count descending and keep only the top N "
+            "before edge-matching. Omit to use all fetched records."
+        ),
     )
     parser.add_argument(
         "--expand-top-n",
@@ -201,6 +216,32 @@ def fetch_connections(
     return trimmed
 
 
+def top_n_by_followers(users: list, n: int | None, debug: bool, context: str) -> list:
+    """Sort a list of user objects by followers_count descending and optionally trim to top N.
+
+    The full sorted list is returned when n is None. When n is set, only the
+    top N are returned. A debug line logs the trim so you can verify which
+    accounts were kept vs dropped.
+    """
+    sorted_users = sorted(
+        users,
+        key=lambda u: (u.followers_count or 0),
+        reverse=True,
+    )
+    if n is None or len(sorted_users) <= n:
+        return sorted_users
+    debug_log(
+        debug,
+        (
+            f"{context}: trimming {len(sorted_users)} fetched accounts "
+            f"to top {n} by follower count. "
+            f"Kept top: {[(u.username, u.followers_count) for u in sorted_users[:3]]} … "
+            f"dropped bottom: {[(u.username, u.followers_count) for u in sorted_users[n:n+3]]}"
+        ),
+    )
+    return sorted_users[:n]
+
+
 def node_payload(user, role: str) -> dict:
     username = user.username or ""
     return {
@@ -274,7 +315,7 @@ def main() -> None:
         (
             f"Output directory is {output_dir.resolve()}. "
             f"Seed limit={args.seed_limit}, per-account limit={args.per_account_limit}, "
-            f"timeout={args.timeout}s."
+            f"per-account top-n={args.per_account_top_n}, timeout={args.timeout}s."
         ),
     )
 
@@ -360,7 +401,7 @@ def main() -> None:
             ),
         )
 
-        # Optionally cap how many accounts get expanded
+        # Optionally cap how many first-degree accounts get expanded
         expand_list = first_degree_sorted
         if args.expand_top_n is not None:
             expand_list = first_degree_sorted[: args.expand_top_n]
@@ -376,7 +417,7 @@ def main() -> None:
                 f"Inspecting second-degree following for @{user.username} "
                 f"(followers={user.followers_count or 0:,}).",
             )
-            following = fetch_connections(
+            following_raw = fetch_connections(
                 client,
                 cache,
                 user.username,
@@ -384,6 +425,18 @@ def main() -> None:
                 args.per_account_limit,
                 debug=args.debug,
             )
+
+            # Sort the fetched following list by follower count and optionally
+            # trim to top N. This focuses edge-matching on the highest-influence
+            # accounts each first-degree node follows, e.g. the top 100 most
+            # followed accounts that DonaldJTrumpJr follows.
+            following = top_n_by_followers(
+                following_raw,
+                args.per_account_top_n,
+                args.debug,
+                context=f"@{user.username}",
+            )
+
             matched_edges = 0
             for neighbor in following:
                 if not neighbor.username or neighbor.username not in interesting_usernames:
@@ -399,7 +452,8 @@ def main() -> None:
                 debug_log(args.debug, f"Added internal edge @{user.username} -> @{neighbor.username}.")
             debug_log(
                 args.debug,
-                f"Finished @{user.username}: found {matched_edges} edges back into the sampled network.",
+                f"Finished @{user.username}: found {matched_edges} edges back into the sampled network "
+                f"(checked {len(following)} of {len(following_raw)} fetched accounts).",
             )
 
         deduped_edges = list(
@@ -421,6 +475,7 @@ def main() -> None:
             "seed_username": seed_username,
             "seed_limit": args.seed_limit,
             "per_account_limit": args.per_account_limit,
+            "per_account_top_n": args.per_account_top_n,
             "expand_top_n": args.expand_top_n,
             "node_count": len(nodes),
             "edge_count": len(deduped_edges),
