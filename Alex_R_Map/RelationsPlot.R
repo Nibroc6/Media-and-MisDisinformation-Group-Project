@@ -1,60 +1,55 @@
 library(networkD3)
+library(htmlwidgets)
 
 # Nodes
 Players <- data.frame(
   name = c(
-    "0 Donald Trump Jr.", 
-    "1 Robert F. Kennedy Jr.",
-    "2 Laura Loomer",
-    "3 Matt Gaetz",
-    "4 Dr. Robert Malone",
-    "5 Dr. Marty Makary",
-    "6 Children's Health Defense",
-    "7 Dr. William Parker",
-    "8 Dr. Jay Bhattacharya",
-    "9 Dr. Mehmet Oz",
-    "10 Nick Sortor",
-    "11 Alex Clark",
-    "12 Moms Across America",
-    "13 Joe Rogan",
-    "14 The Wall Street Journal",
-    "15 Bloomberg TV",
-    "16 Fox News",
-    "17 The Daily Caller",
-    "18 Infowars",
-    "19 Dr. Andrea Baccarelli",
-    "20 Harvard School of Public Health",
-    "21 The Atlantic"
+    "Donald Trump Jr.", 
+    "Robert F. Kennedy Jr.",
+    "Laura Loomer",
+    "Matt Gaetz",
+    "Dr. Robert Malone",
+    "Dr. Marty Makary",
+    "Children's Health Defense",
+    "Dr. William Parker",
+    "Dr. Jay Bhattacharya",
+    "Dr. Mehmet Oz",
+    "Nick Sortor",
+    "Alex Clark",
+    "Moms Across America",
+    "Joe Rogan",
+    "The Wall Street Journal",
+    "Bloomberg TV",
+    "Fox News",
+    "The Daily Caller",
+    "Infowars",
+    "Dr. Andrea Baccarelli",
+    "Harvard School of Public Health",
+    "The Atlantic"
   ),
-  # Group Key:
-  # 1 = Executive Branch
-  # 2 = Influencer
-  # 3 = Organization
-  # 4 = Researcher
-  # 5 = Press
   group = c(
-    1, 
-    1, 
-    2, 
-    2, 
-    1, 
-    1,
-    3,
-    4,
-    1,
-    1,
-    2,
-    2,
-    3,
-    2,
-    5,
-    5,
-    5,
-    5,
-    5,
-    4,
-    3,
-    5
+    "Executive Branch", 
+    "Executive Branch", 
+    "Influencer", 
+    "Influencer", 
+    "Executive Branch", 
+    "Executive Branch",
+    "Non-Government Organization",
+    "Researcher",
+    "Executive Branch",
+    "Executive Branch",
+    "Influencer",
+    "Influencer",
+    "Non-Government Organization",
+    "Influencer",
+    "Press",
+    "Press",
+    "Press",
+    "Press",
+    "Press",
+    "Researcher",
+    "Non-Government Organization",
+    "Press"
   )
 )
 
@@ -62,26 +57,26 @@ Players <- data.frame(
 Edges <- data.frame(
   source = c(
       0, 1, 5, 1, 1, # Executive
-      1, 1, 2, 8, # Non-govt professional associations  
-      2, 2, 2, 2, 3,  # Influencers and orgs "reporting"
-      14 # Actual reporting (mostly)
+      1, 1, 2, 8, 19, 18, # Non-govt professional associations  
+      2, 2, 2, 2, 3, 10, 13, 6, # Influencers and orgs "reporting"
+      14, 18, 18, 15, 5, 5, 5, 16, 17, 1, 21, 21, 21 # Actual reporting (mostly)
     ),
   target = c(
       1, 5, 4, 8, 9, # Executive
-      6, 7, 7, 7, # Non-govt professional associations
-      0, 1, 16, 7, 4, #Influencers and orgs"reporting"
-      1 # Actual reporting (mostly)
+      6, 7, 7, 7, 20, 13, # Non-govt professional associations
+      0, 1, 16, 7, 4, 1, 20, 14, #Influencers and orgs"reporting"
+      1, 14, 1, 5, 14, 19, 16, 9, 1, 17, 1, 7, 8 # Actual reporting (mostly)
     ),
   value = c(
       1, 1, 1, 1, 1, # Executive
-      1, 1, 1, 1, # Non-govt professional associations 
-      1, 1, 1, 1, 1, # Influencers and orgs "reporting"
-      1 # Actual reporting (mostly)
+      1, 1, 1, 1, 1, 1, # Non-govt professional associations 
+      1, 1, 1, 1, 1, 1, 1, 1, # Influencers and orgs "reporting"
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 # Actual reporting (mostly)
     )
 )
 
 # Plot
-forceNetwork(
+p <- forceNetwork(
   Links = Edges,
   Nodes = Players,
   Source = "source",
@@ -89,7 +84,14 @@ forceNetwork(
   Value = "value",
   NodeID = "name",
   Group = "group",
-  opacity = 0.7,
-  colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"),
-  zoom = TRUE
+  fontSize = 12,
+  fontFamily = "sans-serif",
+  opacity = 0.9,
+  colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"),
+  zoom = TRUE,
+  arrows = TRUE,
+  legend = TRUE
 )
+
+p
+
