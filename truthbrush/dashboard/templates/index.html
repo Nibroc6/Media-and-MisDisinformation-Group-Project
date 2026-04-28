@@ -130,6 +130,7 @@
                         <small class="text-muted me-3">🖱️ <b>2D:</b> Click & drag to pan. <b>3D:</b> WASD to fly, mouse to look, scroll to adjust speed. Click a node to zoom in.</small>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkGraph()">📥 Download PNG</button>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkData()">📥 Download Data</button>
+                        <button class="btn btn-sm btn-secondary" id="fullscreen-btn" onclick="toggleFullscreen()" style="display: none;">⛶ Fullscreen</button>
                     </div>
                 </div>
                 <div class="row g-2">
@@ -151,6 +152,13 @@
                             
                             <input type="radio" class="btn-check" name="network-view" id="view-3d" value="3d" onchange="loadNetworkGraph()">
                             <label class="btn btn-outline-primary" for="view-3d">3D Force</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">🔍 Find User</span>
+                            <input type="text" class="form-control" id="user-search-input" placeholder="Enter username..." onkeypress="handleSearchKeypress(event)">
+                            <button class="btn btn-outline-primary" type="button" onclick="zoomToUser()">Search</button>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -298,6 +306,39 @@
         loadStatistics();
     }
 
+    function exitFullscreen() {
+        const container = document.getElementById('network-graph-container');
+        const btn = document.getElementById('fullscreen-btn');
+        const isFullscreen = container.classList.contains('fullscreen');
+        
+        if (isFullscreen) {
+            container.classList.remove('fullscreen');
+            document.body.classList.remove('fullscreen-active');
+            btn.innerHTML = '⛶ Fullscreen';
+        }
+    }
+
+    function toggleFullscreen() {
+        const container = document.getElementById('network-graph-container');
+        const btn = document.getElementById('fullscreen-btn');
+        const isFullscreen = container.classList.contains('fullscreen');
+        
+        if (isFullscreen) {
+            // Exit fullscreen
+            exitFullscreen();
+        } else {
+            // Enter fullscreen
+            container.classList.add('fullscreen');
+            document.body.classList.add('fullscreen-active');
+            btn.innerHTML = '⊗ Exit Fullscreen';
+            
+            // Trigger resize event so the 3D graph resizes properly
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 100);
+        }
+    }
+
     function loadNetworkGraph() {
         const filterParams = getFilterParams();
         const networkParams = getNetworkParams();
@@ -337,6 +378,10 @@
     function renderNetwork2D(nodes, edges) {
         // Clear any existing graph
         const container = document.getElementById('network-graph-container');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        
+        // Hide fullscreen button for 2D view
+        fullscreenBtn.style.display = 'none';
         container.innerHTML = '';
         
         // Check if Force-Graph is loaded
@@ -446,12 +491,22 @@
         Graph.width(container.offsetWidth);
         Graph.height(800);
         Graph.enableNodeDrag(true);
+        
+        // Store references for zoom functionality
+        currentGraph = Graph;
+        currentGraphData = graphData;
+        currentGraphType = '2d';
     }
 
     function renderNetwork3D(nodes, edges) {
         console.log('🔍 renderNetwork3D: Initializing with', nodes?.length, 'nodes and', edges?.length, 'edges');
 
         const container = document.getElementById('network-graph-container');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        
+        // Show fullscreen button for 3D view
+        fullscreenBtn.style.display = 'inline-block';
+        fullscreenBtn.innerHTML = '⛶ Fullscreen';
         container.innerHTML = '';
 
         if (typeof ForceGraph3D === 'undefined') {
@@ -510,19 +565,6 @@
         Graph.nodeResolution(16);
         Graph.nodeOpacity(0.85);
 
-        // Helper to show the info panel for any node
-        function showNodePanel(node) {
-            if (!node) return;
-            const panel = document.getElementById('user-info-panel');
-            document.getElementById('user-info-name').textContent = node.name;
-            document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
-            document.getElementById('user-info-posts').textContent = node.post_count.toLocaleString();
-            document.getElementById('user-info-engagement').textContent = node.engagement.toLocaleString();
-            document.getElementById('user-info-link').href = `https://truthsocial.com/@${node.name}`;
-            panel.classList.remove('d-none');
-            panel.classList.add('d-flex');
-        }
-
         // Use three-spritetext for 3D labels — lives in the scene, zooms/moves with nodes natively
         import("https://esm.sh/three-spritetext").then(({ default: SpriteText }) => {
             Graph
@@ -543,7 +585,7 @@
         Graph.onNodeClick(node => {
             if (!node) return;
             console.log('Node clicked:', node);
-            showNodePanel(node);
+            showNodeInfoPanel(node);
             // Aim camera at node from outside it (from the snippet example)
             const distance = 40;
             const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
@@ -560,10 +602,10 @@
 
         // Drag: open the info panel as soon as dragging starts
         Graph.onNodeDrag(node => {
-            if (node) showNodePanel(node);
+            if (node) showNodeInfoPanel(node);
         });
         
-        Graph.linkColor(() => 'rgba(150, 150, 150, 0.5)');
+        Graph.linkColor(() => 'rgba(240, 240, 240, 1.0)');
         Graph.linkDirectionalArrowLength(4);
         Graph.linkDirectionalArrowRelPos(0.7);
         Graph.linkWidth(d => Math.sqrt(d.weight) * 0.4);
@@ -583,7 +625,13 @@
         // Suppress arrow-key page scrolling while the mouse is over the 3D canvas
         // (fly controls use arrow keys for navigation)
         const flyKeys = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
-        const suppressKeys = e => { if (flyKeys.has(e.key)) e.preventDefault(); };
+        const suppressKeys = e => {
+            // Don't suppress keys if an input field is focused
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                return;
+            }
+            if (flyKeys.has(e.key)) e.preventDefault();
+        };
         let keyListenerActive = false;
         container.addEventListener('mouseenter', () => {
             if (!keyListenerActive) {
@@ -595,6 +643,101 @@
             document.removeEventListener('keydown', suppressKeys);
             keyListenerActive = false;
         });
+
+        // Store references for zoom functionality
+        currentGraph = Graph;
+        currentGraphData = graphData;
+        currentGraphType = '3d';
+
+        // Handle fullscreen resizing
+        const handleResize = () => {
+            Graph.width(container.offsetWidth)
+                 .height(container.offsetHeight);
+        };
+        window.addEventListener('resize', handleResize);
+
+        // Handle Escape key to exit fullscreen
+        const handleEscapeKey = (e) => {
+            if (e.key === 'Escape') {
+                exitFullscreen();
+            }
+        };
+        document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    // Global reference to store current graph instance and data for searching
+    let currentGraph = null;
+    let currentGraphData = null;
+    let currentGraphType = '2d'; // '2d' or '3d'
+
+    // Helper function to show node info panel
+    function showNodeInfoPanel(node) {
+        if (!node) return;
+        const panel = document.getElementById('user-info-panel');
+        document.getElementById('user-info-name').textContent = node.name;
+        document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
+        document.getElementById('user-info-posts').textContent = node.post_count.toLocaleString();
+        document.getElementById('user-info-engagement').textContent = node.engagement.toLocaleString();
+        document.getElementById('user-info-link').href = `https://truthsocial.com/@${node.name}`;
+        panel.classList.remove('d-none');
+        panel.classList.add('d-flex');
+    }
+
+    function handleSearchKeypress(event) {
+        if (event.key === 'Enter') {
+            zoomToUser();
+        }
+    }
+
+    function zoomToUser() {
+        const username = document.getElementById('user-search-input').value.trim();
+        
+        if (!username) {
+            alert('Please enter a username to search for.');
+            return;
+        }
+
+        if (!currentGraphData || !currentGraphData.nodes) {
+            alert('Network graph not loaded yet. Please load the network first.');
+            return;
+        }
+
+        // Find the node with matching username (case-insensitive)
+        const node = currentGraphData.nodes.find(n => 
+            n.name.toLowerCase() === username.toLowerCase()
+        );
+
+        if (!node) {
+            alert(`User "${username}" not found in the network. Check the spelling and try again.`);
+            return;
+        }
+
+        // Show the info panel
+        showNodeInfoPanel(node);
+
+        // Zoom to the node based on current graph type
+        if (currentGraphType === '3d' && currentGraph) {
+            // 3D zoom: position camera at a good angle around the node
+            const distance = 0;
+            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+
+            const newPos = node.x || node.y || node.z
+                ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
+                : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+            
+            currentGraph.cameraPosition(newPos, node, 2000);
+            console.log('Zoomed to 3D node:', node.name);
+        } else if (currentGraphType === '2d' && currentGraph) {
+            // 2D zoom: center on node
+            currentGraph.centerAt(node.x, node.y, 1000);
+            console.log('Zoomed to 2D node:', node.name);
+        } else {
+            alert('Graph not available. Please make sure the network is loaded.');
+            return;
+        }
+        
+        // Clear search input on successful zoom
+        document.getElementById('user-search-input').value = '';
     }
 
     function loadTimeline() {
