@@ -1,0 +1,55 @@
+id,username,label,followers_count,following_count,verified,role
+23970102,BillOReilly,Bill O'Reilly,3326113,132,True,seed_following
+4121225056,CLewandowski_,Corey R. Lewandowski,580010,56,True,seed_following
+620571475,DanScavino,Dan Scavino Jr.🇺🇸🦅,2236139,1015,True,seed_following
+2908170952,DiamondandSilk,Diamond and Silk®,2427440,116,True,seed_following
+39344374,DonaldJTrumpJr,Donald Trump Jr.,16241024,2322,True,seed_following
+39349894,EricTrump,Eric Trump,6026869,1294,True,seed_following
+246500501,GeraldoRivera,Geraldo Rivera,394100,2021,True,seed_following
+50769180,IngrahamAngle,Laura Ingraham,5304631,767,True,seed_following
+52544275,IvankaTrump,Ivanka Trump,11191173,1749,True,seed_following
+56561449,JesseBWatters,Jesse Watters,3623749,1871,True,seed_following
+18166778,Jim_Jordan,Rep. Jim Jordan,6817714,3635,True,seed_following
+29458079,JudgeJeanine,Jeanine Pirro,4162206,570,True,seed_following
+34852681,KatrinaCampins,Katrina Campins,225851,2186,True,seed_following
+471672239,KellyannePolls,Kellyanne Conway,3564603,1200,True,seed_following
+75541946,LaraLeaTrump,Lara Trump,2203560,822,True,seed_following
+26487169,LouDobbs,Lou Dobbs,2372414,2930,True,seed_following
+108471631,MELANIATRUMP,MELANIA TRUMP,3976188,68,True,seed_following
+208155240,MariaBartiromo,Maria Bartiromo,1596902,2151,True,seed_following
+316865635,MarkBurnettTV,Mark Burnett,210017,438,True,seed_following
+963480595,MarkMeadows,Mark Meadows,1080684,1078,True,seed_following
+22203756,Mike_Pence,Mike Pence,5666186,66,True,seed_following
+475802156,MrsVanessaTrump,Ms Vanessa Trump,421943,267,True,seed_following
+818927131883356161,PressSec45,Kayleigh McEnany 45 Archived,5339893,329,True,seed_following
+322293052,RealRomaDowney,Roma Downey,261040,2994,True,seed_following
+20733972,Reince,Reince Priebus,788695,323,True,seed_following
+2353605901,RonnaMcDaniel,Ronna McDaniel,1258347,2727,True,seed_following
+823367015830323201,Scavino45,Dan Scavino Jr. Archived,762553,878,True,seed_following
+1249982359,SenMcConnell,U.S. Senator Mitch McConnell,2101045,112,True,seed_following
+19739126,SpeakerMcCarthy,Kevin McCarthy,3125977,1479,True,seed_following
+729676086632656900,TeamTrump,Team Trump (Text TRUMP to 88022),2619949,185,True,seed_following
+245963716,TiffanyATrump,Tiffany Ariana Trump,1023061,205,True,seed_following
+720293443260456960,Trump,The Trump Organization,758671,58,False,seed_following
+726414091,TrumpCharlotte,Trump Charlotte,113748,120,False,seed_following
+48223726,TrumpChicago,Trump Chicago,131441,3144,False,seed_following
+633797941,TrumpDoral,Trump National Doral Miami,138124,1546,True,seed_following
+2325495378,TrumpGolf,Trump Golf,195620,112,True,seed_following
+1013672084,TrumpGolfDC,Trump Washington DC,158080,54,False,seed_following
+29562422,TrumpGolfLA,Trump Los Angeles,134726,96,False,seed_following
+82504071,TrumpLasVegas,Trump Las Vegas,162379,1130,True,seed_following
+22703645,TuckerCarlson,Tucker Carlson,17585905,3,True,seed_following
+1222639789,VinceMcMahon,Vince McMahon,2238572,49,True,seed_following
+822215673812119553,WhiteHouse45,The White House 45 Archived,22792915,12,True,seed_following
+44196397,elonmusk,Elon Musk,238694170,1315,True,seed_following
+14839147,ericbolling,🇺🇸 ERIC BOLLING 🇺🇸,1175242,1310,True,seed_following
+15513604,foxandfriends,FOX & Friends,1189085,217,True,seed_following
+26829777,garyplayer,GARY PLAYER,804606,1650,True,seed_following
+16031927,greta,Greta Van Susteren,1219573,3450,True,seed_following
+25101996,kimguilfoyle,Kimberly Guilfoyle,2291116,3876,True,seed_following
+770458758,meremere28,Meredith ORourke,19203,1852,False,seed_following
+17685258,parscale,Brad Parscale,721091,664,True,seed_following
+25073877,realDonaldTrump,Donald J. Trump,111403932,53,True,seed
+1807844428322856963,realtrumpcoins1,realtrumpcoins,37578,2,True,seed_following
+41634520,seanhannity,Sean Hannity 🇺🇸,7740572,14,True,seed_following
+1816138985342705664,worldlibertyfi,WLFI,773553,21,True,seed_following
