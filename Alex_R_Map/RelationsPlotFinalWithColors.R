@@ -74,7 +74,7 @@ Edges <- data.frame(
     1, 7, 8,
     5, 5
   ),
-  value = 1,
+  value = 6,
   color = c(
     "#ef476f", "#ef476f", "#ef476f", "#ef476f", "#ef476f",
     "#ffd166", "#dabfff", "#dabfff", "#dabfff", "#ef476f", "#ef476f",
