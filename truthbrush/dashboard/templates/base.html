@@ -11,27 +11,9 @@
     <!-- Plotly JS (local) -->
     <script src="{{ url_for('static', filename='plotly.js-3.5.0/dist/plotly.min.js') }}"></script>
     
-    <!-- Three.js (local via module) and Force-Graphs -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "{{ url_for('static', filename='three.js-master/build/three.module.min.js') }}"
-      }
-    }
-    </script>
-    <script type="module">
-        import * as THREE from 'three';
-        window.THREE = THREE;
-        
-        // Now dynamically load force-graph scripts so THREE is absolutely ready
-        const fg2d = document.createElement('script');
-        fg2d.src = "https://cdn.jsdelivr.net/npm/force-graph";
-        document.head.appendChild(fg2d);
-        
-        const fg3d = document.createElement('script');
-        fg3d.src = "https://cdn.jsdelivr.net/npm/3d-force-graph";
-        document.head.appendChild(fg3d);
-    </script>
+    <!-- Force-Graph libraries (3d-force-graph includes Three.js internally) -->
+    <script src="https://unpkg.com/force-graph"></script>
+    <script src="https://unpkg.com/3d-force-graph"></script>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">

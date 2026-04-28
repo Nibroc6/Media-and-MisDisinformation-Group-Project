@@ -127,7 +127,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h5 class="mb-0">Network Graph: How Misinformation Spreads</h5>
                     <div>
-                        <small class="text-muted me-3">🖱️ <b>2D:</b> Left-click drag background to pan. <b>3D:</b> Left-click drag to rotate, Right-click drag to pan. Click edges to view post.</small>
+                        <small class="text-muted me-3">🖱️ <b>2D:</b> Click & drag to pan. <b>3D:</b> Left-drag to orbit, right-drag to pan, scroll to zoom. Click nodes for details.</small>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkGraph()">📥 Download PNG</button>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkData()">📥 Download Data</button>
                     </div>
@@ -371,26 +371,24 @@
         
         // Configure Force-Graph - all physics and layout handled internally
         Graph.graphData(graphData);
-        Graph.nodeLabel(d => `<b>${d.name}</b><br>Followers: ${d.followers.toLocaleString()}<br>Posts: ${d.post_count}<br>Engagement: ${d.engagement.toLocaleString()}`);
-        Graph.nodeAutoColorBy('engagement');
-        Graph.nodeCanvasObject((node, ctx) => {
-            // Draw node circle
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.val, 0, 2 * Math.PI, false);
-            ctx.fillStyle = `rgba(${Math.min(255, node.engagement / 15)}, 100, 150, 0.8)`;
-            ctx.fill();
-            ctx.strokeStyle = 'white';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            
-            // Draw label
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-            ctx.font = `${Math.max(12, node.val * 0.8)}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.fillText(node.name.substring(0, 15), node.x, node.y + node.val + 2);
-        });
         
+        // Enable built-in hover labels with rich HTML content
+        Graph.nodeLabel(d => `
+            <div style="padding: 8px; background: rgba(0,0,0,0.9); border-radius: 6px; color: white; max-width: 250px; border: 1px solid #666;">
+                <div style="font-weight: bold; margin-bottom: 4px;">${d.name}</div>
+                <div style="font-size: 12px; line-height: 1.4;">
+                    <div>Followers: <strong>${d.followers.toLocaleString()}</strong></div>
+                    <div>Posts: <strong>${d.post_count}</strong></div>
+                    <div>Engagement: <strong>${d.engagement.toLocaleString()}</strong></div>
+                </div>
+            </div>
+        `);
+        
+        Graph.nodeColor(d => {
+            const intensity = Math.min(255, Math.floor(d.engagement / 15));
+            return `rgba(${intensity}, 100, 150, 0.9)`;
+        });
+
         // Link styling - darker lines with more contrast
         Graph.linkColor(() => 'rgba(150, 150, 150, 0.6)');
         Graph.linkDirectionalArrowLength(3);
@@ -399,7 +397,18 @@
         Graph.linkWidth(d => Math.sqrt(d.weight) * 0.5);
         Graph.linkDirectionalParticles(d => Math.min(3, d.weight));
         Graph.linkDirectionalParticleWidth(2);
+        
+        // Track hovered node for better UX
+        let hoveredNode = null;
+        Graph.onNodeHover(node => {
+            hoveredNode = node;
+            container.style.cursor = node ? 'pointer' : 'auto';
+        });
+        
+        // Show full info panel on click
         Graph.onNodeClick(node => {
+            if (!node) return;
+            
             const panel = document.getElementById('user-info-panel');
             document.getElementById('user-info-name').textContent = node.name;
             document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
@@ -409,6 +418,21 @@
             panel.classList.remove('d-none');
             panel.classList.add('d-flex');
         });
+        
+        // Update info while dragging
+        Graph.onNodeDrag(node => {
+            if (node) {
+                const panel = document.getElementById('user-info-panel');
+                if (!panel.classList.contains('d-none')) {
+                    // Keep panel updated during drag
+                    document.getElementById('user-info-name').textContent = node.name;
+                    document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
+                    document.getElementById('user-info-posts').textContent = node.post_count.toLocaleString();
+                    document.getElementById('user-info-engagement').textContent = node.engagement.toLocaleString();
+                }
+            }
+        });
+        
         Graph.onLinkClick(link => {
             if (link.post_id) {
                 const targetName = (typeof link.target === 'object' && link.target.name) ? link.target.name : link.target;
@@ -418,68 +442,35 @@
                 alert('No post ID available for this interaction.');
             }
         });
-        Graph.onNodeHover(node => {
-            container.style.cursor = node ? 'pointer' : 'auto';
-        });
+        
         Graph.width(container.offsetWidth);
         Graph.height(800);
         Graph.enableNodeDrag(true);
     }
 
     function renderNetwork3D(nodes, edges) {
-        // --- DEBUG: first thing, before anything can crash ---
-        console.group('🔍 renderNetwork3D entered');
-        console.log('nodes:', nodes?.length, 'edges:', edges?.length);
-        console.log('ForceGraph3D:', typeof ForceGraph3D);
-        console.log('THREE:', typeof THREE, window.THREE?.REVISION);
+        console.log('🔍 renderNetwork3D: Initializing with', nodes?.length, 'nodes and', edges?.length, 'edges');
 
         const container = document.getElementById('network-graph-container');
         container.innerHTML = '';
 
         if (typeof ForceGraph3D === 'undefined') {
             console.error('❌ ForceGraph3D not loaded');
-            console.groupEnd();
             container.innerHTML = '<div class="alert alert-danger">Error: Force-Graph 3D library failed to load.</div>';
-            return;
-        }
-        if (typeof THREE === 'undefined') {
-            console.error('❌ THREE not loaded');
-            console.groupEnd();
-            container.innerHTML = '<div class="alert alert-danger">Error: Three.js library failed to load.</div>';
             return;
         }
 
         let Graph;
         try {
-            Graph = new ForceGraph3D()(container);
+            Graph = new ForceGraph3D(container, { controlType: 'orbit' })
+                .width(container.offsetWidth)
+                .height(800)
+                .backgroundColor('rgba(20, 20, 20, 1)');
             console.log('✅ ForceGraph3D instance created');
-            console.log('controls:', Graph.controls?.());
-            console.log('enableRotate:', Graph.controls?.()?.enableRotate);
         } catch(e) {
             console.error('❌ ForceGraph3D constructor threw:', e);
-            console.groupEnd();
             return;
         }
-
-        // Check canvas + controls after graph has had time to fully init
-        setTimeout(() => {
-            console.group('🔍 Post-init check (1s)');
-            const canvas = container.querySelector('canvas');
-            console.log('canvas:', canvas);
-            console.log('canvas pointer-events:', canvas ? getComputedStyle(canvas).pointerEvents : '❌ NO CANVAS');
-            console.log('container padding:', getComputedStyle(container).padding);
-            const controls = Graph.controls?.();
-            console.log('controls:', controls);
-            console.log('enableRotate:', controls?.enableRotate);
-            console.log('enabled:', controls?.enabled);
-            if (canvas) {
-                canvas.addEventListener('mousedown', e => console.log('✅ mousedown on CANVAS', e.button), { once: true });
-                container.addEventListener('mousedown', e => console.log('⚠️ mousedown on CONTAINER', e.button, e.target.tagName), { once: true });
-            }
-            console.groupEnd();
-        }, 1000);
-
-        console.groupEnd(); // end sync debug group
 
         // Prepare data
         const graphData = {
@@ -502,58 +493,26 @@
         };
 
         Graph.graphData(graphData);
-        Graph.nodeLabel(d => `<b>${d.name}</b><br>Followers: ${d.followers.toLocaleString()}<br>Posts: ${d.post_count}<br>Engagement: ${d.engagement.toLocaleString()}`);
+        
+        // Hover labels (tooltip)
+        Graph.nodeLabel(d => `
+            <div style="padding: 8px; background: rgba(0,0,0,0.95); border-radius: 6px; color: white; max-width: 250px; border: 2px solid #ff6699; white-space: nowrap;">
+                <strong>${d.name}</strong>
+            </div>
+        `);
+        
+        Graph.nodeVal(d => d.val);
+        Graph.nodeRelSize(5);
         Graph.nodeColor(d => {
-            const intensity = Math.min(255, d.engagement / 15);
+            const intensity = Math.min(255, Math.floor(d.engagement / 15));
             return `rgb(${intensity}, 100, 150)`;
         });
+        Graph.nodeResolution(16);
+        Graph.nodeOpacity(0.85);
 
-        function makeTextSprite(text) {
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.width = 256;
-            canvas.height = 64;
-            context.fillStyle = "rgba(255, 255, 255, 0.7)";
-            context.beginPath();
-            context.roundRect(32, 12, 192, 40, 20);
-            context.fill();
-            context.font = "bold 28px Arial";
-            context.fillStyle = "rgba(20, 20, 20, 1.0)";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            context.fillText(text.substring(0, 15), 128, 32);
-            const texture = new THREE.CanvasTexture(canvas);
-            const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
-            const sprite = new THREE.Sprite(material);
-            sprite.scale.set(30, 7.5, 1);
-            return sprite;
-        }
-
-        Graph.nodeThreeObject(node => {
-            const group = new THREE.Group();
-            const geometry = new THREE.SphereGeometry(node.val, 16, 16);
-            const material = new THREE.MeshStandardMaterial({
-                color: `rgb(${Math.min(255, node.engagement / 15)}, 100, 150)`,
-                emissive: `rgb(${Math.min(200, node.engagement / 20)}, 70, 110)`,
-                metalness: 0.6,
-                roughness: 0.3
-            });
-            const sphere = new THREE.Mesh(geometry, material);
-            group.add(sphere);
-            const sprite = makeTextSprite(node.name || "");
-            sprite.raycast = () => {}; // prevent sprites stealing raycasts from OrbitControls
-            sprite.position.set(0, node.val + 2, 0);
-            group.add(sprite);
-            return group;
-        });
-
-        Graph.linkColor(() => 'rgba(150, 150, 150, 0.4)');
-        Graph.linkDirectionalArrowLength(4);
-        Graph.linkDirectionalArrowRelPos(0.7);
-        Graph.linkWidth(d => Math.sqrt(d.weight) * 0.3);
-        Graph.linkDirectionalParticles(d => Math.min(2, Math.floor(d.weight / 2)));
-        Graph.linkDirectionalParticleWidth(1.5);
-        Graph.onNodeClick(node => {
+        // Helper to show the info panel for any node
+        function showNodePanel(node) {
+            if (!node) return;
             const panel = document.getElementById('user-info-panel');
             document.getElementById('user-info-name').textContent = node.name;
             document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
@@ -562,28 +521,55 @@
             document.getElementById('user-info-link').href = `https://truthsocial.com/@${node.name}`;
             panel.classList.remove('d-none');
             panel.classList.add('d-flex');
-            const distance = 40;
-            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-            const newPos = node.x || node.y || node.z
-                ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
-                : { x: 0, y: 0, z: distance };
-            Graph.cameraPosition(newPos, node, 1000);
+        }
+
+        // Use three-spritetext for 3D labels — lives in the scene, zooms/moves with nodes natively
+        import("https://esm.sh/three-spritetext").then(({ default: SpriteText }) => {
+            Graph
+                .nodeThreeObject(node => {
+                    const sprite = new SpriteText(node.name.substring(0, 16));
+                    sprite.material.depthWrite = false;
+                    sprite.color = '#ffffff';
+                    sprite.backgroundColor = 'rgba(30,30,30,0.75)';
+                    sprite.padding = 2;
+                    sprite.textHeight = 4;
+                    sprite.center.y = -1.2; // shift label above the sphere
+                    return sprite;
+                })
+                .nodeThreeObjectExtend(true);
         });
+
+        // Click handler
+        Graph.onNodeClick(node => {
+            if (!node) return;
+            showNodePanel(node);
+        });
+
+        // Hover: cursor feedback
+        Graph.onNodeHover(node => {
+            container.style.cursor = node ? 'pointer' : 'auto';
+        });
+
+        // Drag: open the info panel as soon as dragging starts
+        Graph.onNodeDrag(node => {
+            if (node) showNodePanel(node);
+        });
+        
+        Graph.linkColor(() => 'rgba(150, 150, 150, 0.5)');
+        Graph.linkDirectionalArrowLength(4);
+        Graph.linkDirectionalArrowRelPos(0.7);
+        Graph.linkWidth(d => Math.sqrt(d.weight) * 0.4);
+        Graph.linkDirectionalParticles(d => Math.min(3, Math.floor(d.weight / 2)));
+        Graph.linkDirectionalParticleWidth(1.5);
+
         Graph.onLinkClick(link => {
             if (link.post_id) {
                 const targetName = (typeof link.target === 'object' && link.target.name) ? link.target.name : link.target;
                 const author = (link.type === 'reblog' || link.type === 'reply') ? targetName : ((typeof link.source === 'object' && link.source.name) ? link.source.name : link.source);
                 window.open(`https://truthsocial.com/@${author}/${link.post_id}`, '_blank');
-            } else {
-                alert('No post ID available for this interaction.');
             }
         });
-        Graph.onNodeHover(node => {
-            container.style.cursor = node ? 'pointer' : 'auto';
-        });
-        Graph.width(container.offsetWidth);
-        Graph.height(800);
-        Graph.backgroundColor('rgba(245, 245, 245, 1)');
+
         Graph.enableNodeDrag(true);
     }
 
