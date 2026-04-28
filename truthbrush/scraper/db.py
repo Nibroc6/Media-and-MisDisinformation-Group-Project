@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from .config import DB_PATH
+from config import DB_PATH
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -39,7 +39,7 @@ def upsert_user(user_data):
     conn.commit()
     conn.close()
 
-def upsert_post(post_data, author_id):
+def upsert_post(post_data, author_id, source_tag=None):
     """
     Insert or ignore a post.
     """
@@ -49,8 +49,8 @@ def upsert_post(post_data, author_id):
     cursor.execute("""
         INSERT OR IGNORE INTO posts (
             id, author_id, content, created_at,
-            reblogs_count, replies_count, favourites_count, raw_data
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            reblogs_count, replies_count, favourites_count, source_tag, raw_data
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         post_data.get("id"),
         author_id,
@@ -59,12 +59,13 @@ def upsert_post(post_data, author_id):
         post_data.get("reblogs_count"),
         post_data.get("replies_count"),
         post_data.get("favourites_count"),
+        source_tag,
         json.dumps(post_data)
     ))
     conn.commit()
     conn.close()
 
-def insert_edge(source_user_id, target_user_id, post_id, interaction_type):
+def insert_edge(source_user_id, target_user_id, post_id, interaction_type, source_tag=None):
     """
     Insert an interaction edge between two users for the network map.
     """
@@ -73,13 +74,25 @@ def insert_edge(source_user_id, target_user_id, post_id, interaction_type):
     
     cursor.execute("""
         INSERT OR IGNORE INTO edges (
-            source_user_id, target_user_id, post_id, interaction_type
-        ) VALUES (?, ?, ?, ?)
+            source_user_id, target_user_id, post_id, interaction_type, source_tag
+        ) VALUES (?, ?, ?, ?, ?)
     """, (
         source_user_id,
         target_user_id,
         post_id,
-        interaction_type
+        interaction_type,
+        source_tag
     ))
     conn.commit()
     conn.close()
+
+def post_exists(post_id):
+    """
+    Check if a post already exists in the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1 FROM posts WHERE id = ?", (post_id,))
+    exists = cursor.fetchone() is not None
+    conn.close()
+    return exists

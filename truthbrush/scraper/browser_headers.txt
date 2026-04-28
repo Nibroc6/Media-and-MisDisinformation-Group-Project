@@ -1,0 +1,17 @@
+GET /api/v1/accounts/108783594593870400 HTTP/2
+Host: truthsocial.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:150.0) Gecko/20100101 Firefox/150.0
+Accept: application/json, text/plain, */*
+Accept-Language: en-US,en;q=0.9
+Accept-Encoding: gzip, deflate, br, zstd
+Authorization: Bearer nYVjSWkEpJZF4U9NtJPD8JZDTTrgb1PYga2J7Hrd_Ks
+sentry-trace: f717883ebfc44b92b2bdf9402d143c86-92a21feb87e9c945
+baggage: sentry-environment=production,sentry-release=47529736f524927c735f071218192a137a3d9fd1,sentry-public_key=341951a6e21a4c929c321aa2720401f5,sentry-trace_id=f717883ebfc44b92b2bdf9402d143c86
+Sec-GPC: 1
+Connection: keep-alive
+Referer: https://truthsocial.com/discover
+Cookie: __cflb=0H28vTPqhjwKvpvovP7uB2bKEYha7QdoeFpgJ8KrfUK; _cfuvid=Bcsno_t8iOYieq6WWRFh1wiwuz.khhAbkuW7Kb1BCPQ-1777305553.5882316-1.0.1.1-Yk8yYJkfJBhq9CeOq39PqM91U4ABAMhtz5HSmGlQ5Fs; CookieScriptConsent={"action":"accept","consenttime":1759857650,"categories":"[\"functionality\"]","googleconsentmap":{"ad_storage":"targeting","analytics_storage":"performance","ad_personalization":"targeting","ad_user_data":"targeting","functionality_storage":"functionality","personalization_storage":"functionality","security_storage":"functionality"},"key":"a00a28b2-2a40-40a7-b2ef-6e7106771790"}; _mastodon_session=y8rTZv3Vq4babRmKTb9%2BP8mxAzdZ2kCE3KDcYOPi%2BNWUiQ%2BedBAR5XHWZvCYKOK1o39VL2IRloIgFB3fJMUlUo7BVolydMLqXz28NsxbpFT8ScjmZLh8LIPB9PNsoEbk9uQ6vi85T6qHFbwpvYHKUkB8cW3%2FoAnOMn3Jone8BSIsmEPP5xO9ylsdXcl8KF0LdZFVT%2F4cnH3nMVXZXrcAiSP573gtnFLL%2Fm86nZ1xYNptN2ucO%2BJ3a28SAsiH--DHha7mDnDysvU4EN--5vTyOwCx%2BCXkA%2BzaQrmQWQ%3D%3D; __cf_bm=bdMngd3h8ur8J2Bvcmrhb3wOeDW77sf68MiT7RoZY6w-1777305553.5894408-1.0.1.1-.K9KXznDYcyzxYRCiurA.SZvlHUnyjUdf4yWhWxiZ0DYgMdPD.oq8afeSWtMA_cp0PrtVHN6fb_yY091qlxb3DzOwN4vULLtJ9XAr1IOEGiLyHMNRl1HrPyw5ou08org; cf_clearance=AzQmPIl57y.yPCDK9WxL4Lu5khJ7Zvldg5skpNhQ.pA-1777304585-1.2.1.1-5NJ78FaJ2_APkIJIFGCTkpsg6hOEmJIwarR3A5w.FvKuBteuUQ8cvRTMmy1zNUuDKZxTHgXIuGeqOC73s9w3nlSl6pZd0_JejpikjaM43_ZAif0WYPR3dvSDEljwmWOMRgw.sTh8KcFSTFYCWyM0VJu7XUDfnjkfYyNJdChfQx.5fbqwS9IdxasqwS.Gof49OjREKiw5OVI.ulJDI8iHI7j..oKMpPtv9pE8083yMbMx9g5GLqQ223it_xWU2VbB7.5gJTAeCYpnDXuz7RnHBjHXeVahAQ0VTE0c_8K7jA75VvLBMw7NJu_Jxx9CELeZnuZFMp9hbajM1B8ZlaIWSw
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+TE: trailers

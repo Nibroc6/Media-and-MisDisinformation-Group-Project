@@ -1,0 +1,788 @@
+{% extends "base.html" %}
+
+{% block title %}Autism-Tylenol Misinformation Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Statistics Dashboard -->
+<div class="row mb-4">
+    <div class="col-md-2">
+        <div class="card stat-card bg-primary text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Users</h6>
+                <h3 id="stat-users">{{ stats.total_users or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card bg-success text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Posts</h6>
+                <h3 id="stat-posts">{{ stats.total_posts or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card bg-warning text-dark">
+            <div class="card-body">
+                <h6 class="card-title">Interactions</h6>
+                <h3 id="stat-interactions">{{ stats.total_interactions or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card bg-danger text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Reblogs</h6>
+                <h3 id="stat-reblogs">{{ stats.total_reblogs or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card bg-info text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Favourites</h6>
+                <h3 id="stat-favourites">{{ stats.total_favourites or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card bg-secondary text-white">
+            <div class="card-body">
+                <h6 class="card-title">Total Replies</h6>
+                <h3 id="stat-replies">{{ stats.total_replies or 0 }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Control Panel -->
+<div class="card mb-4">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">Filters & Controls</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="filter-date-start" class="form-label">Start Date</label>
+                <input type="date" id="filter-date-start" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="filter-date-end" class="form-label">End Date</label>
+                <input type="date" id="filter-date-end" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="filter-min-engagement" class="form-label">Min Engagement</label>
+                <input type="number" id="filter-min-engagement" class="form-control" value="0" min="0">
+            </div>
+            <div class="col-md-3">
+                <label>&nbsp;</label>
+                <button class="btn btn-primary w-100" onclick="applyFilters()">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab Navigation -->
+<ul class="nav nav-tabs mb-4" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="network-tab" data-bs-toggle="tab" data-bs-target="#network-panel" type="button" role="tab">
+            🔗 Network Graph
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="timeline-tab" data-bs-toggle="tab" data-bs-target="#timeline-panel" type="button" role="tab">
+            📈 Timeline
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-panel" type="button" role="tab">
+            📊 Statistics
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="heatmap-tab" data-bs-toggle="tab" data-bs-target="#heatmap-panel" type="button" role="tab">
+            🔥 Influence Heatmap
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="clustering-tab" data-bs-toggle="tab" data-bs-target="#clustering-panel" type="button" role="tab">
+            🎯 Clustering
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts-panel" type="button" role="tab">
+            💬 Top Posts
+        </button>
+    </li>
+</ul>
+
+<!-- Tab Content -->
+<div class="tab-content">
+    
+    <!-- Network Graph Tab -->
+    <div class="tab-pane fade show active" id="network-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Network Graph: How Misinformation Spreads</h5>
+                    <div>
+                        <small class="text-muted me-3">🖱️ <b>2D:</b> Left-click drag background to pan. <b>3D:</b> Left-click drag to rotate, Right-click drag to pan. Click edges to view post.</small>
+                        <button class="btn btn-sm btn-secondary" onclick="downloadNetworkGraph()">📥 Download PNG</button>
+                        <button class="btn btn-sm btn-secondary" onclick="downloadNetworkData()">📥 Download Data</button>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div id="user-info-panel" class="alert alert-secondary w-100 mb-2 py-2 px-3 shadow-sm border-0 d-none d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center flex-wrap gap-2 text-dark">
+                            <strong><i class="fs-5">👤</i> <span id="user-info-name">Name</span></strong>
+                            <span class="badge bg-light text-dark shadow-sm">Followers: <span id="user-info-followers">0</span></span>
+                            <span class="badge bg-light text-dark shadow-sm">Posts: <span id="user-info-posts">0</span></span>
+                            <span class="badge bg-light text-dark shadow-sm">Engagement: <span id="user-info-engagement">0</span></span>
+                            <a id="user-info-link" href="#" target="_blank" class="btn btn-sm btn-primary ms-1 py-0 px-2 fw-medium">View Profile ↗</a>
+                        </div>
+                        <button type="button" class="btn-close m-0" aria-label="Close" onclick="document.getElementById('user-info-panel').classList.add('d-none')"></button>
+                    </div>
+                    <div class="col-auto">
+                        <label class="form-label mb-0 me-2">Visualization:</label>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="network-view" id="view-2d" value="2d" checked onchange="loadNetworkGraph()">
+                            <label class="btn btn-outline-primary" for="view-2d">2D Force</label>
+                            
+                            <input type="radio" class="btn-check" name="network-view" id="view-3d" value="3d" onchange="loadNetworkGraph()">
+                            <label class="btn btn-outline-primary" for="view-3d">3D Force</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-sm btn-outline-secondary" onclick="loadNetworkGraph()">Refresh</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="network-loading" class="alert alert-info">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Loading network graph...
+                </div>
+                <div id="network-graph-container" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline Tab -->
+    <div class="tab-pane fade" id="timeline-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Chronological Spread: Daily Engagement Over Time</h5>
+                <div>
+                    <button class="btn btn-sm btn-secondary" onclick="downloadTimelineGraph()">📥 Download PNG</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="timeline-loading" class="alert alert-info">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Loading timeline...
+                </div>
+                <div id="timeline-graph-container" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Tab -->
+    <div class="tab-pane fade" id="stats-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Detailed Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Top Influencers (by Followers)</h6>
+                        <div id="top-influencers" style="max-height: 400px; overflow-y: auto;">
+                            <p class="text-muted">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Interaction Type Breakdown</h6>
+                        <div id="interaction-breakdown-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heatmap Tab -->
+    <div class="tab-pane fade" id="heatmap-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Influence Heatmap: Top 20 Users</h5>
+                <div>
+                    <button class="btn btn-sm btn-secondary" onclick="downloadHeatmapGraph()">📥 Download PNG</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="heatmap-loading" class="alert alert-info">
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Loading heatmap...
+                </div>
+                <div id="heatmap-graph-container" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clustering Tab -->
+    <div class="tab-pane fade" id="clustering-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Community Detection & Clustering</h5>
+            </div>
+            <div class="card-body">
+                <div id="clustering-content">
+                    <p class="text-muted">Loading clustering analysis...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Posts Tab -->
+    <div class="tab-pane fade" id="posts-panel" role="tabpanel">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Most Engaged Posts</h5>
+            </div>
+            <div class="card-body">
+                <div id="top-posts-content" style="max-height: 600px; overflow-y: auto;">
+                    <p class="text-muted">Loading top posts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script>
+    // Load initial data - await external scripts if needed
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkLibs = setInterval(() => {
+            if (typeof ForceGraph !== 'undefined' && typeof ForceGraph3D !== 'undefined') {
+                clearInterval(checkLibs);
+                loadNetworkGraph();
+            }
+        }, 100);
+        
+        // Load other visualizations when tabs are clicked
+        document.getElementById('timeline-tab').addEventListener('click', loadTimeline);
+        document.getElementById('stats-tab').addEventListener('click', loadStatistics);
+        document.getElementById('heatmap-tab').addEventListener('click', loadHeatmap);
+        document.getElementById('clustering-tab').addEventListener('click', loadClustering);
+        document.getElementById('posts-tab').addEventListener('click', loadTopPosts);
+    });
+
+    function getFilterParams() {
+        return {
+            date_start: document.getElementById('filter-date-start').value || null,
+            date_end: document.getElementById('filter-date-end').value || null,
+            min_engagement: document.getElementById('filter-min-engagement').value || 0
+        };
+    }
+
+    function getNetworkParams() {
+        const selectedView = document.querySelector('input[name="network-view"]:checked');
+        const view = selectedView ? selectedView.value : '2d';
+        return { view };
+    }
+
+    function applyFilters() {
+        loadNetworkGraph();
+        loadTimeline();
+        loadStatistics();
+    }
+
+    function loadNetworkGraph() {
+        const filterParams = getFilterParams();
+        const networkParams = getNetworkParams();
+        const queryStr = new URLSearchParams(Object.entries(filterParams).filter(([, v]) => v != null));
+        
+        document.getElementById('network-loading').style.display = 'block';
+        document.getElementById('network-graph-container').style.display = 'none';
+
+        fetch(`/api/network?${queryStr}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Network data:', data);
+                const nodes = data.nodes;
+                const edges = data.edges;
+                const view = networkParams.view;
+                
+                if (!nodes || nodes.length === 0) {
+                    throw new Error('No network data available');
+                }
+                
+                // Render 2D or 3D - Force-Graph handles layout
+                if (view === '3d') {
+                    renderNetwork3D(nodes, edges);
+                } else {
+                    renderNetwork2D(nodes, edges);
+                }
+                
+                document.getElementById('network-loading').style.display = 'none';
+                document.getElementById('network-graph-container').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error loading network:', error);
+                document.getElementById('network-loading').innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            });
+    }
+
+    function renderNetwork2D(nodes, edges) {
+        // Clear any existing graph
+        const container = document.getElementById('network-graph-container');
+        container.innerHTML = '';
+        
+        // Check if Force-Graph is loaded
+        if (typeof ForceGraph === 'undefined') {
+            console.error('ForceGraph library not loaded. Check that CDN is accessible.');
+            container.innerHTML = '<div class="alert alert-danger">Error: Force-Graph 2D library failed to load. Check browser console for details.</div>';
+            return;
+        }
+        
+        // Create Force-Graph instance (2D) - Force-Graph handles layout internally
+        const Graph = new ForceGraph()(container);
+        
+        // Prepare data for Force-Graph
+        const graphData = {
+            nodes: nodes.map(n => ({
+                id: n.id,
+                name: n.label,
+                val: Math.max(5, Math.min(20, (n.followers || 100) / 2000 + 5)),
+                engagement: n.engagement || 0,
+                followers: n.followers || 0,
+                post_count: n.post_count || 0,
+                total_reblogs: n.total_reblogs || 0
+            })),
+            links: edges.map(e => ({
+                source: e.source,
+                target: e.target,
+                type: e.type,
+                weight: e.weight,
+                post_id: e.post_id
+            }))
+        };
+        
+        // Configure Force-Graph - all physics and layout handled internally
+        Graph.graphData(graphData);
+        Graph.nodeLabel(d => `<b>${d.name}</b><br>Followers: ${d.followers.toLocaleString()}<br>Posts: ${d.post_count}<br>Engagement: ${d.engagement.toLocaleString()}`);
+        Graph.nodeAutoColorBy('engagement');
+        Graph.nodeCanvasObject((node, ctx) => {
+            // Draw node circle
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.val, 0, 2 * Math.PI, false);
+            ctx.fillStyle = `rgba(${Math.min(255, node.engagement / 15)}, 100, 150, 0.8)`;
+            ctx.fill();
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // Draw label
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            ctx.font = `${Math.max(12, node.val * 0.8)}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText(node.name.substring(0, 15), node.x, node.y + node.val + 2);
+        });
+        
+        // Link styling - darker lines with more contrast
+        Graph.linkColor(() => 'rgba(150, 150, 150, 0.6)');
+        Graph.linkDirectionalArrowLength(3);
+        Graph.linkDirectionalArrowRelPos(0.7);
+        Graph.linkCurvature(0.25);
+        Graph.linkWidth(d => Math.sqrt(d.weight) * 0.5);
+        Graph.linkDirectionalParticles(d => Math.min(3, d.weight));
+        Graph.linkDirectionalParticleWidth(2);
+        Graph.onNodeClick(node => {
+            const panel = document.getElementById('user-info-panel');
+            document.getElementById('user-info-name').textContent = node.name;
+            document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
+            document.getElementById('user-info-posts').textContent = node.post_count.toLocaleString();
+            document.getElementById('user-info-engagement').textContent = node.engagement.toLocaleString();
+            document.getElementById('user-info-link').href = `https://truthsocial.com/@${node.name}`;
+            panel.classList.remove('d-none');
+            panel.classList.add('d-flex');
+        });
+        Graph.onLinkClick(link => {
+            if (link.post_id) {
+                const targetName = (typeof link.target === 'object' && link.target.name) ? link.target.name : link.target;
+                const author = (link.type === 'reblog' || link.type === 'reply') ? targetName : ((typeof link.source === 'object' && link.source.name) ? link.source.name : link.source);
+                window.open(`https://truthsocial.com/@${author}/${link.post_id}`, '_blank');
+            } else {
+                alert('No post ID available for this interaction.');
+            }
+        });
+        Graph.onNodeHover(node => {
+            container.style.cursor = node ? 'pointer' : 'auto';
+        });
+        Graph.width(container.offsetWidth);
+        Graph.height(800);
+        Graph.enableNodeDrag(true);
+    }
+
+    function renderNetwork3D(nodes, edges) {
+        // --- DEBUG: first thing, before anything can crash ---
+        console.group('🔍 renderNetwork3D entered');
+        console.log('nodes:', nodes?.length, 'edges:', edges?.length);
+        console.log('ForceGraph3D:', typeof ForceGraph3D);
+        console.log('THREE:', typeof THREE, window.THREE?.REVISION);
+
+        const container = document.getElementById('network-graph-container');
+        container.innerHTML = '';
+
+        if (typeof ForceGraph3D === 'undefined') {
+            console.error('❌ ForceGraph3D not loaded');
+            console.groupEnd();
+            container.innerHTML = '<div class="alert alert-danger">Error: Force-Graph 3D library failed to load.</div>';
+            return;
+        }
+        if (typeof THREE === 'undefined') {
+            console.error('❌ THREE not loaded');
+            console.groupEnd();
+            container.innerHTML = '<div class="alert alert-danger">Error: Three.js library failed to load.</div>';
+            return;
+        }
+
+        let Graph;
+        try {
+            Graph = new ForceGraph3D()(container);
+            console.log('✅ ForceGraph3D instance created');
+            console.log('controls:', Graph.controls?.());
+            console.log('enableRotate:', Graph.controls?.()?.enableRotate);
+        } catch(e) {
+            console.error('❌ ForceGraph3D constructor threw:', e);
+            console.groupEnd();
+            return;
+        }
+
+        // Check canvas + controls after graph has had time to fully init
+        setTimeout(() => {
+            console.group('🔍 Post-init check (1s)');
+            const canvas = container.querySelector('canvas');
+            console.log('canvas:', canvas);
+            console.log('canvas pointer-events:', canvas ? getComputedStyle(canvas).pointerEvents : '❌ NO CANVAS');
+            console.log('container padding:', getComputedStyle(container).padding);
+            const controls = Graph.controls?.();
+            console.log('controls:', controls);
+            console.log('enableRotate:', controls?.enableRotate);
+            console.log('enabled:', controls?.enabled);
+            if (canvas) {
+                canvas.addEventListener('mousedown', e => console.log('✅ mousedown on CANVAS', e.button), { once: true });
+                container.addEventListener('mousedown', e => console.log('⚠️ mousedown on CONTAINER', e.button, e.target.tagName), { once: true });
+            }
+            console.groupEnd();
+        }, 1000);
+
+        console.groupEnd(); // end sync debug group
+
+        // Prepare data
+        const graphData = {
+            nodes: nodes.map(n => ({
+                id: n.id,
+                name: n.label,
+                val: Math.max(4, Math.min(15, (n.followers || 100) / 2500 + 4)),
+                engagement: n.engagement || 0,
+                followers: n.followers || 0,
+                post_count: n.post_count || 0,
+                total_reblogs: n.total_reblogs || 0
+            })),
+            links: edges.map(e => ({
+                source: e.source,
+                target: e.target,
+                type: e.type,
+                weight: e.weight,
+                post_id: e.post_id
+            }))
+        };
+
+        Graph.graphData(graphData);
+        Graph.nodeLabel(d => `<b>${d.name}</b><br>Followers: ${d.followers.toLocaleString()}<br>Posts: ${d.post_count}<br>Engagement: ${d.engagement.toLocaleString()}`);
+        Graph.nodeColor(d => {
+            const intensity = Math.min(255, d.engagement / 15);
+            return `rgb(${intensity}, 100, 150)`;
+        });
+
+        function makeTextSprite(text) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 64;
+            context.fillStyle = "rgba(255, 255, 255, 0.7)";
+            context.beginPath();
+            context.roundRect(32, 12, 192, 40, 20);
+            context.fill();
+            context.font = "bold 28px Arial";
+            context.fillStyle = "rgba(20, 20, 20, 1.0)";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillText(text.substring(0, 15), 128, 32);
+            const texture = new THREE.CanvasTexture(canvas);
+            const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
+            const sprite = new THREE.Sprite(material);
+            sprite.scale.set(30, 7.5, 1);
+            return sprite;
+        }
+
+        Graph.nodeThreeObject(node => {
+            const group = new THREE.Group();
+            const geometry = new THREE.SphereGeometry(node.val, 16, 16);
+            const material = new THREE.MeshStandardMaterial({
+                color: `rgb(${Math.min(255, node.engagement / 15)}, 100, 150)`,
+                emissive: `rgb(${Math.min(200, node.engagement / 20)}, 70, 110)`,
+                metalness: 0.6,
+                roughness: 0.3
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            group.add(sphere);
+            const sprite = makeTextSprite(node.name || "");
+            sprite.raycast = () => {}; // prevent sprites stealing raycasts from OrbitControls
+            sprite.position.set(0, node.val + 2, 0);
+            group.add(sprite);
+            return group;
+        });
+
+        Graph.linkColor(() => 'rgba(150, 150, 150, 0.4)');
+        Graph.linkDirectionalArrowLength(4);
+        Graph.linkDirectionalArrowRelPos(0.7);
+        Graph.linkWidth(d => Math.sqrt(d.weight) * 0.3);
+        Graph.linkDirectionalParticles(d => Math.min(2, Math.floor(d.weight / 2)));
+        Graph.linkDirectionalParticleWidth(1.5);
+        Graph.onNodeClick(node => {
+            const panel = document.getElementById('user-info-panel');
+            document.getElementById('user-info-name').textContent = node.name;
+            document.getElementById('user-info-followers').textContent = node.followers.toLocaleString();
+            document.getElementById('user-info-posts').textContent = node.post_count.toLocaleString();
+            document.getElementById('user-info-engagement').textContent = node.engagement.toLocaleString();
+            document.getElementById('user-info-link').href = `https://truthsocial.com/@${node.name}`;
+            panel.classList.remove('d-none');
+            panel.classList.add('d-flex');
+            const distance = 40;
+            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+            const newPos = node.x || node.y || node.z
+                ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
+                : { x: 0, y: 0, z: distance };
+            Graph.cameraPosition(newPos, node, 1000);
+        });
+        Graph.onLinkClick(link => {
+            if (link.post_id) {
+                const targetName = (typeof link.target === 'object' && link.target.name) ? link.target.name : link.target;
+                const author = (link.type === 'reblog' || link.type === 'reply') ? targetName : ((typeof link.source === 'object' && link.source.name) ? link.source.name : link.source);
+                window.open(`https://truthsocial.com/@${author}/${link.post_id}`, '_blank');
+            } else {
+                alert('No post ID available for this interaction.');
+            }
+        });
+        Graph.onNodeHover(node => {
+            container.style.cursor = node ? 'pointer' : 'auto';
+        });
+        Graph.width(container.offsetWidth);
+        Graph.height(800);
+        Graph.backgroundColor('rgba(245, 245, 245, 1)');
+        Graph.enableNodeDrag(true);
+    }
+
+    function loadTimeline() {
+        const params = getFilterParams();
+        const queryStr = new URLSearchParams(Object.entries(params).filter(([, v]) => v != null));
+        
+        document.getElementById('timeline-loading').style.display = 'block';
+        document.getElementById('timeline-graph-container').style.display = 'none';
+
+        fetch(`/api/timeline?${queryStr}`)
+            .then(response => response.json())
+            .then(data => {
+                const df = data;
+                const dates = df.map(d => d.date);
+                const postCounts = df.map(d => d.post_count);
+                const favourites = df.map(d => d.total_favourites);
+                
+                const trace1 = {
+                    x: dates,
+                    y: postCounts,
+                    name: 'Posts',
+                    mode: 'lines+markers',
+                    yaxis: 'y1'
+                };
+                
+                const trace2 = {
+                    x: dates,
+                    y: favourites,
+                    name: 'Favourites',
+                    mode: 'lines',
+                    yaxis: 'y2'
+                };
+                
+                const layout = {
+                    title: 'Autism-Tylenol Misinformation Spread Over Time',
+                    xaxis: { title: 'Date' },
+                    yaxis: { title: 'Post Count', side: 'left' },
+                    yaxis2: { title: 'Favourites', side: 'right', overlaying: 'y' },
+                    hovermode: 'x unified',
+                    height: 500,
+                    plot_bgcolor: 'rgba(240, 240, 240, 0.9)'
+                };
+                
+                Plotly.newPlot('timeline-graph-container', [trace1, trace2], layout, { responsive: true });
+                
+                document.getElementById('timeline-loading').style.display = 'none';
+                document.getElementById('timeline-graph-container').style.display = 'block';
+            })
+            .catch(error => console.error('Error loading timeline:', error));
+    }
+
+    function loadStatistics() {
+        fetch('/api/statistics')
+            .then(response => response.json())
+            .then(data => {
+                // Display top influencers
+                const influencersHtml = data.top_influencers.map(u => 
+                    `<div class="border-bottom pb-2 mb-2">
+                        <strong>${u.username}</strong><br>
+                        <small>Followers: ${u.followers_count || 0} | Posts: ${u.post_count || 0}</small>
+                    </div>`
+                ).join('');
+                document.getElementById('top-influencers').innerHTML = influencersHtml || '<p>No data</p>';
+                
+                // Display interaction breakdown
+                const interactionData = {
+                    x: data.interaction_breakdown.map(i => i.interaction_type),
+                    y: data.interaction_breakdown.map(i => i.count),
+                    type: 'bar',
+                    marker: { color: 'rgb(158, 154, 200)' }
+                };
+                
+                const layout = {
+                    title: 'Interaction Type Breakdown',
+                    xaxis: { title: 'Interaction Type' },
+                    yaxis: { title: 'Count' },
+                    height: 400
+                };
+                
+                Plotly.newPlot('interaction-breakdown-chart', [interactionData], layout);
+            })
+            .catch(error => console.error('Error loading statistics:', error));
+    }
+
+    function loadHeatmap() {
+        document.getElementById('heatmap-loading').style.display = 'block';
+        document.getElementById('heatmap-graph-container').style.display = 'none';
+
+        fetch('/api/influence-heatmap')
+            .then(response => response.json())
+            .then(data => {
+                const users = data.users;
+                const interactions = data.interactions;
+                
+                const n = users.length;
+                const matrix = Array(n).fill(null).map(() => Array(n).fill(0));
+                const userIdToIdx = Object.fromEntries(users.map((u, i) => [u.id, i]));
+                
+                interactions.forEach(inter => {
+                    if (userIdToIdx[inter.source_user_id] !== undefined && userIdToIdx[inter.target_user_id] !== undefined) {
+                        const i = userIdToIdx[inter.source_user_id];
+                        const j = userIdToIdx[inter.target_user_id];
+                        matrix[i][j] = inter.interaction_count;
+                    }
+                });
+                
+                const trace = {
+                    z: matrix,
+                    x: users.map(u => u.username.substring(0, 15)),
+                    y: users.map(u => u.username.substring(0, 15)),
+                    type: 'heatmap',
+                    colorscale: 'Viridis'
+                };
+                
+                const layout = {
+                    title: 'User-to-User Interaction Heatmap (Top 20 Influencers)',
+                    xaxis: { title: 'Target User' },
+                    yaxis: { title: 'Source User' },
+                    height: 600,
+                    width: 800
+                };
+                
+                Plotly.newPlot('heatmap-graph-container', [trace], layout, { responsive: true });
+                
+                document.getElementById('heatmap-loading').style.display = 'none';
+                document.getElementById('heatmap-graph-container').style.display = 'block';
+            })
+            .catch(error => console.error('Error loading heatmap:', error));
+    }
+
+    function loadClustering() {
+        fetch('/api/clustering')
+            .then(response => response.json())
+            .then(data => {
+                const html = `
+                    <div class="alert alert-info">
+                        <strong>Network Structure Analysis:</strong><br>
+                        Total Nodes Analyzed: ${data.nodes.length}<br>
+                        Identified Clusters: ${data.cluster_count}<br>
+                        ${data.note}
+                    </div>
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        ${data.nodes.map(n => `
+                            <div class="border-bottom pb-2 mb-2">
+                                <strong>${n.username}</strong><br>
+                                <small>Out: ${n.outgoing_connections || 0} | In: ${n.incoming_connections || 0} | Followers: ${n.followers_count || 0}</small>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                document.getElementById('clustering-content').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading clustering:', error));
+    }
+
+    function loadTopPosts() {
+        const params = { limit: 15, ...getFilterParams() };
+        const queryStr = new URLSearchParams(Object.entries(params).filter(([, v]) => v != null));
+        
+        fetch(`/api/top-posts?${queryStr}`)
+            .then(response => response.json())
+            .then(data => {
+                const html = data.map(post => `
+                    <div class="border-bottom pb-3 mb-3">
+                        <div><strong>${post.username}</strong> <small class="text-muted">${post.created_at}</small></div>
+                        <p class="mb-2">${(post.content || '').substring(0, 200)}...</p>
+                        <small>
+                            <span class="badge bg-success">Reblogs: ${post.reblogs_count}</span>
+                            <span class="badge bg-warning">Favourites: ${post.favourites_count}</span>
+                            <span class="badge bg-info">Replies: ${post.replies_count}</span>
+                        </small>
+                    </div>
+                `).join('');
+                document.getElementById('top-posts-content').innerHTML = html || '<p>No posts found</p>';
+            })
+            .catch(error => console.error('Error loading top posts:', error));
+    }
+
+    function downloadNetworkGraph() {
+        const graphDiv = document.getElementById('network-graph-container');
+        Plotly.downloadImage(graphDiv, { format: 'png', width: 1400, height: 900, filename: 'network-graph-force' });
+    }
+
+    function downloadTimelineGraph() {
+        const graphDiv = document.getElementById('timeline-graph-container');
+        Plotly.downloadImage(graphDiv, { format: 'png', width: 1200, height: 600, filename: 'timeline-graph' });
+    }
+
+    function downloadHeatmapGraph() {
+        const graphDiv = document.getElementById('heatmap-graph-container');
+        Plotly.downloadImage(graphDiv, { format: 'png', width: 1000, height: 900, filename: 'heatmap-graph' });
+    }
+
+    function downloadNetworkData() {
+        const params = { ...getFilterParams(), ...getNetworkParams() };
+        const queryStr = new URLSearchParams(Object.entries(params).filter(([, v]) => v != null));
+        window.location.href = `/api/network?${queryStr}`;
+    }
+</script>
+
+{% endblock %}

@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS posts (
     reblogs_count INTEGER,
     replies_count INTEGER,
     favourites_count INTEGER,
+    source_tag TEXT,
     raw_data JSON,
     FOREIGN KEY(author_id) REFERENCES users(id)
 );
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS edges (
     target_user_id TEXT NOT NULL,
     post_id TEXT NOT NULL,
     interaction_type TEXT NOT NULL,
+    source_tag TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(source_user_id) REFERENCES users(id),
     FOREIGN KEY(target_user_id) REFERENCES users(id),

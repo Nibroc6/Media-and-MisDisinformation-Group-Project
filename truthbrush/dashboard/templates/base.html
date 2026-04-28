@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Truth Social Misinformation Dashboard{% endblock %}</title>
+    
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Plotly JS (local) -->
+    <script src="{{ url_for('static', filename='plotly.js-3.5.0/dist/plotly.min.js') }}"></script>
+    
+    <!-- Three.js (local via module) and Force-Graphs -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "{{ url_for('static', filename='three.js-master/build/three.module.min.js') }}"
+      }
+    }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        window.THREE = THREE;
+        
+        // Now dynamically load force-graph scripts so THREE is absolutely ready
+        const fg2d = document.createElement('script');
+        fg2d.src = "https://cdn.jsdelivr.net/npm/force-graph";
+        document.head.appendChild(fg2d);
+        
+        const fg3d = document.createElement('script');
+        fg3d.src = "https://cdn.jsdelivr.net/npm/3d-force-graph";
+        document.head.appendChild(fg3d);
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+                🔍 Truth Social Misinformation Network
+            </span>
+            <span class="navbar-text text-muted">
+                Autism-Tylenol Link Misinformation Spread Analysis
+            </span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-5">
+        <small class="text-muted">
+            Academic Analysis Dashboard | Data sourced from Truth Social via truthbrush scraper
+        </small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
