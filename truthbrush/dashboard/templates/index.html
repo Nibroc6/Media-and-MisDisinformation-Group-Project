@@ -127,7 +127,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h5 class="mb-0">Network Graph: How Misinformation Spreads</h5>
                     <div>
-                        <small class="text-muted me-3">🖱️ <b>2D:</b> Click & drag to pan. <b>3D:</b> Left-drag to orbit, right-drag to pan, scroll to zoom. Click nodes for details.</small>
+                        <small class="text-muted me-3">🖱️ <b>2D:</b> Click & drag to pan. <b>3D:</b> WASD to fly, mouse to look, scroll to adjust speed. Click a node to zoom in.</small>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkGraph()">📥 Download PNG</button>
                         <button class="btn btn-sm btn-secondary" onclick="downloadNetworkData()">📥 Download Data</button>
                     </div>
@@ -462,7 +462,7 @@
 
         let Graph;
         try {
-            Graph = new ForceGraph3D(container, { controlType: 'orbit' })
+            Graph = new ForceGraph3D(container, { controlType: 'fly' })
                 .width(container.offsetWidth)
                 .height(800)
                 .backgroundColor('rgba(20, 20, 20, 1)');
@@ -539,10 +539,18 @@
                 .nodeThreeObjectExtend(true);
         });
 
-        // Click handler
+        // Click: log node, show info panel, and fly camera in to aim at the node
         Graph.onNodeClick(node => {
             if (!node) return;
+            console.log('Node clicked:', node);
             showNodePanel(node);
+            // Aim camera at node from outside it (from the snippet example)
+            const distance = 40;
+            const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+            const newPos = node.x || node.y || node.z
+                ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }
+                : { x: 0, y: 0, z: distance };
+            Graph.cameraPosition(newPos, node, 3000);
         });
 
         // Hover: cursor feedback
@@ -571,6 +579,22 @@
         });
 
         Graph.enableNodeDrag(true);
+
+        // Suppress arrow-key page scrolling while the mouse is over the 3D canvas
+        // (fly controls use arrow keys for navigation)
+        const flyKeys = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
+        const suppressKeys = e => { if (flyKeys.has(e.key)) e.preventDefault(); };
+        let keyListenerActive = false;
+        container.addEventListener('mouseenter', () => {
+            if (!keyListenerActive) {
+                document.addEventListener('keydown', suppressKeys);
+                keyListenerActive = true;
+            }
+        });
+        container.addEventListener('mouseleave', () => {
+            document.removeEventListener('keydown', suppressKeys);
+            keyListenerActive = false;
+        });
     }
 
     function loadTimeline() {

@@ -66,8 +66,12 @@ def process_post(post, source_tag=None):
     for mention in mentions:
         mentioned_user_id = mention.get("id")
         if mentioned_user_id:
-             logger.debug(f"Creating MENTION edge: @{author_username} -> {mentioned_user_id}")
-             insert_edge(
+            # Upsert mention data if available
+            if mention.get("username"):
+                upsert_user(mention)
+            
+            logger.debug(f"Creating MENTION edge: @{author_username} -> {mentioned_user_id}")
+            insert_edge(
                 source_user_id=author_id,
                 target_user_id=mentioned_user_id,
                 post_id=post_id,
