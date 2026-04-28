@@ -129,7 +129,13 @@ def fetch_connections(
     limit: int,
     debug: bool = False,
 ) -> list:
-    """Fetch paginated connections, consulting the cache first."""
+    """Fetch paginated connections, consulting the cache first.
+
+    Pagination errors (e.g. malformed user records from the API causing Pydantic
+    validation failures) are caught per-page. Whatever was successfully collected
+    before the bad page is kept and cached — the run continues rather than
+    crashing the whole script.
+    """
     if limit <= 0:
         debug_log(debug, f"Skipping {connection_type} fetch for @{username}: limit is {limit}.")
         return []
@@ -142,11 +148,16 @@ def fetch_connections(
             return dicts_to_fake_users(cached)
 
     debug_log(debug, f"Fetching up to {limit} {connection_type} records for @{username}.")
-    page = client.twitter.get_user_connections(
-        username,
-        connection_type,
-        fields=DEFAULT_FIELDS,
-    )
+    try:
+        page = client.twitter.get_user_connections(
+            username,
+            connection_type,
+            fields=DEFAULT_FIELDS,
+        )
+    except Exception as exc:
+        debug_log(debug, f"Failed to fetch first page of {connection_type} for @{username}: {exc}. Skipping.")
+        return []
+
     items = []
     seen_usernames = set()
     for user in page.data:
@@ -170,7 +181,21 @@ def fetch_connections(
     empty_or_duplicate_pages = 0
 
     while len(items) < limit and requested_page <= total_pages:
-        page = page.get_page(requested_page)
+        try:
+            page = page.get_page(requested_page)
+        except Exception as exc:
+            # A single bad page (e.g. malformed API record failing Pydantic
+            # validation) should not crash the entire run. Log it, keep what
+            # we have, and stop paginating this account.
+            debug_log(
+                debug,
+                (
+                    f"Stopping @{username} pagination at page {requested_page} "
+                    f"due to error: {exc}. Keeping {len(items)} records collected so far."
+                ),
+            )
+            break
+
         new_items = 0
         for user in page.data:
             if user.username and user.username in seen_usernames:
@@ -428,8 +453,7 @@ def main() -> None:
 
             # Sort the fetched following list by follower count and optionally
             # trim to top N. This focuses edge-matching on the highest-influence
-            # accounts each first-degree node follows, e.g. the top 100 most
-            # followed accounts that DonaldJTrumpJr follows.
+            # accounts each first-degree node follows.
             following = top_n_by_followers(
                 following_raw,
                 args.per_account_top_n,
